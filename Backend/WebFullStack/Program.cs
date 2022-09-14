@@ -10,10 +10,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigureCors();
 builder.Services.ConfigureDatabase(configure);
 
 var app = builder.Build();
-
+app.UseCors(builder => builder
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .SetIsOriginAllowed((host) => true)
+    .AllowCredentials()
+);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

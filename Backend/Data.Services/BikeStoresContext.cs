@@ -31,7 +31,7 @@ namespace Data.Services
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=AILY-VOVDSA8;Initial Catalog=BikeStores;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;User Instance=False");
+                optionsBuilder.UseSqlServer("Data Source=BIN\\SQLEXPRESS;Initial Catalog=BikeStores;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;User Instance=False");
             }
         }
 

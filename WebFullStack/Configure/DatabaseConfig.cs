@@ -10,7 +10,8 @@ namespace WebFullStack.Configure
         {
             services.AddScoped((_) => new BikeStoresContext());
             //services.AddScoped<Interface,Services>();
-            services.AddScoped<ICategoryServices, CategoryServices>();
+            //services.AddScoped<ICategoryServices, CategoryServices>();
+            services.AddScoped<IProductServices, ProductServices>();
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Data.Services
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=BIN\\SQLEXPRESS;Database=BikeStores;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-3HCOMFD;Initial Catalog=BikeStores;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;User Instance=False");
             }
         }
 

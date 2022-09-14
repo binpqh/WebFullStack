@@ -13,8 +13,8 @@ namespace Data.Services.Interfaces
 
         Task<List<Store>> GetAllAsync();
         Task<Store> GetByIdAsync(int id);
-        Task<Store> CreateAsync(StoreInput create);
-        Task<Store> UpdateAsync(int id, StoreInput update);
+        Task<Store> CreateAsync(StoreTypes create);
+        Task<Store> UpdateAsync(int id, StoreTypes update);
         Task DeleteAsync(int id);
 
     }

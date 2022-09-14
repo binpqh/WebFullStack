@@ -20,7 +20,7 @@ namespace Data.Services.Services
         {
             _db = db;
         }
-        public async Task<Store> CreateAsync(StoreInput create)
+        public async Task<Store> CreateAsync(StoreTypes create)
         {
             var store = new Store
             {
@@ -78,7 +78,7 @@ namespace Data.Services.Services
             }
         }
 
-        public async Task<Store> UpdateAsync(int id, StoreInput update)
+        public async Task<Store> UpdateAsync(int id, StoreTypes update)
         {
             var store = await _db.Stores.FindAsync(id);
             if (store == null)

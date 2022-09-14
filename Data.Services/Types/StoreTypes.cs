@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data.Services.Types
 {
-    public class StoreInput
+    public class StoreTypes
     {
         public string StoreName { get; set; } = null!;
         public string? Phone { get; set; }

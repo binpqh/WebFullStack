@@ -26,12 +26,12 @@ namespace WebFullStack.Controllers
             return await _services.GetAllAsync();
         }
         [HttpPost]
-        public async Task<Store> CreateAsync(StoreInput create)
+        public async Task<Store> CreateAsync(StoreTypes create)
         {
             return await _services.CreateAsync(create);
         }
         [HttpPut("{id:int}")]
-        public async Task<Store> UpdateAsync(int id, StoreInput update)
+        public async Task<Store> UpdateAsync(int id, StoreTypes update)
         {
             return await _services.UpdateAsync(id, update);
         }

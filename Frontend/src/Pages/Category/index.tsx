@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { CreateCategory, GetAllCategory, UpdateCategory , DeteleCategory } from '../../Services/Category.Services';
+import { CreateCategory, DeteleCategory, GetAllCategory, UpdateCategory } from '../../Services/Category.Services';
 import { ICategoryResult } from './../../Interfaces/ICategoryServices';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 
@@ -17,7 +17,7 @@ const Category = () => {
             
           };
           fetchData();
-    }, [])
+    }, [categories])
     const columns=[
         {
             key: 'categoryId',
@@ -37,13 +37,15 @@ const Category = () => {
             {
                 return<>
                 <EditOutlined onClick={()=>{showModal(record)}} />
-                <DeleteOutlined onClick={()=>handleDeleteCategory(record.id)} style={{color : "orange",marginLeft : 12}}/>
+                <DeleteOutlined onClick={()=>handleDeleteCategory(record)} style={{color : "orange",marginLeft : 12}}/>
                 </>
             }
         }
     ]
     const showModal =(record : any) =>
     {
+        console.log("chekc có id hon nè"+record.categoryId+record.categoryName);
+        
         setisOpenModal(true);
         setcategoryEdit(record);
     }
@@ -51,33 +53,48 @@ const Category = () => {
     {
         setisOpenModal(false);
     }
-    const handleDeleteCategory=(id : number)=>
+    const handleDeleteCategory=(record : any)=>
     {
         Modal.confirm(
             {
                 title :"Are u sure?",
                 okText :'Sure',
                 okType : 'danger',
-                onOk : ()=>
+                onOk : async ()=>
                 {
-                    // gọi api delete rồi fetch data lại nè
-                     DeteleCategory(id);
+                    await console.log(record.categoryId);
+                    await DeteleCategory(record);
                 }
             })
     }
-    const handleFinish = async(values : any) =>{
-        const isEdit = categories.find((item) => item.id = values.id)
-         if(isEdit)
+    const handleFinish = async(id:number,values : any) =>{
+        const isEdit = categories.findIndex((item)=> item.categoryId === id)
+        
+         if(isEdit >= 0)
          {
-             await console.log(values);
-             await UpdateCategory(values.id,values)
+            await UpdateCategory({categoryId: id,...values})
+            .then((res) =>
+            {
+                const newlistCate = categories.map((item)=>
+                {
+                    if(item.categoryId === id)
+                    {
+                        item.categoryName = values.categoryName;
+                    }
+                    return item;
+                })
+                setCategories(newlistCate);
+            }).catch((error)=>
+            {
+            }).finally(() => {
+                setisOpenModal(false);
+              });
          }
          else
          {
-             
-            await CreateCategory(values)
+            await CreateCategory(values);
+            setisOpenModal(false);
          }
-         setisOpenModal(false)
      }
   return (
     <>

@@ -1,5 +1,8 @@
+import internal from "stream";
+
 export interface IProductResult
 {
+    productId: number;
     productName : string;
     brandName : string;
     categoryName : string;
@@ -8,6 +11,7 @@ export interface IProductResult
 }
 export interface IProductInput
 {
+    productId: number;
     productName : string;
     brandId: number;
     categoryId : number;

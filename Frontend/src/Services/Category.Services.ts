@@ -18,7 +18,7 @@ export const UpdateCategory = async(categoryId : number,categoryName : ICategory
 {
     return(await axiosClient.put<ICategoryResult>(`/Category/${categoryId}`,categoryName)).data;
 };
-// export const DeteleCategory = async(categoryId : number)=>
-// {
-//     return(await axiosClient.delete(`/Category/${categoryId}`)).data;
-// };
+export const DeteleCategory = async(categoryId : number)=>
+{
+    return(await axiosClient.delete(`/Category/${categoryId}`)).data;
+};

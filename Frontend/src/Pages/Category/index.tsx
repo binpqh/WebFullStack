@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { CreateCategory, GetAllCategory, UpdateCategory } from '../../Services/Category.Services';
+import { CreateCategory, GetAllCategory, UpdateCategory, DeteleCategory } from '../../Services/Category.Services';
 import { ICategoryResult } from './../../Interfaces/ICategoryServices';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 
@@ -60,7 +60,15 @@ const Category = () => {
                 okType : 'danger',
                 onOk : ()=>
                 {
-                    // gọi api delete rồi fetch data lại nè
+                    useEffect(() => {
+                        const fetchData = async () => {
+                            const results = await DeteleCategory(id);
+                            setCategories(results);
+                            
+                          };
+                          fetchData();
+                    }, [])
+                    
                 }
             })
     }

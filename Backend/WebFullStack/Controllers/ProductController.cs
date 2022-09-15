@@ -26,12 +26,12 @@ namespace WebFullStack.Controllers
             return await _services.GetAllAsync();
         }
         [HttpPost]
-        public async Task<Product> CreateAsync(ProductType productType)
+        public async Task<Product> CreateAsync(ProductInput productType)
         {
             return await _services.CreateAsync(productType);
         }
         [HttpPut("{id:int}")]
-        public async Task<ProductResult> UpdateAsync(int id, ProductType product)
+        public async Task<ProductResult> UpdateAsync(int id, ProductInput product)
         {
             return await _services.UpdateAsync(id, product);
         }

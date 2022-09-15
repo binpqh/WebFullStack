@@ -1,6 +1,6 @@
 export interface ICategoryResult
 {
-    id? : number;
+    categoryId? : number;
     categoryName : string;
 }
 export interface ICategoryInput

@@ -14,12 +14,7 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureDatabase(configure);
 
 var app = builder.Build();
-app.UseCors(builder => builder
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .SetIsOriginAllowed((host) => true)
-    .AllowCredentials()
-);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -28,7 +23,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();

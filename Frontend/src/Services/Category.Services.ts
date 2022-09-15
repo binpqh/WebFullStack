@@ -1,5 +1,5 @@
 import axiosClient from '../API/AxiosClient';
-import { ICategoryInput,ICategoryResult } from '../Interfaces/ICategoryServices';
+import {ICategoryResult } from '../Interfaces/ICategoryServices';
 
 
 export const GetAllCategory = async()=>
@@ -10,15 +10,15 @@ export const GetbyIdCategory = async(categoryId : number)=>
 {
     return(await axiosClient.get<ICategoryResult>(`/Category/${categoryId}`)).data;
 };
-export const CreateCategory = async(categoryName : ICategoryInput)=>
+export const CreateCategory = async(categoryName : any)=>
 {
     return(await axiosClient.post<ICategoryResult>(`/Category`,categoryName)).data;
 };
-export const UpdateCategory = async(categoryId : number,categoryName : ICategoryInput)=>
+export const UpdateCategory = async(category : any)=>
 {
-    return(await axiosClient.put<ICategoryResult>(`/Category/${categoryId}`,categoryName)).data;
+    return(await axiosClient.put<ICategoryResult>(`/Category/${category.categoryId}`,category)).data;
 };
-export const DeteleCategory = async(categoryId : number)=>
+export const DeteleCategory = async(cate : any)=>
 {
-    return(await axiosClient.delete(`/Category/${categoryId}`)).data;
+    return(await axiosClient.delete(`/Category/${cate.categoryId}`)).data;
 };

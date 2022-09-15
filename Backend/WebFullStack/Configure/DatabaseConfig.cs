@@ -12,6 +12,7 @@ namespace WebFullStack.Configure
             //services.AddScoped<Interface,Services>();
             services.AddScoped<ICategoryServices, CategoryServices>();
             services.AddScoped<IStoreServices, StoreServices>();
+            services.AddScoped<IProductServices, ProductServices>() ;
         }
     }
 }

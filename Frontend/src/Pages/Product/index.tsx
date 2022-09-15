@@ -1,49 +1,121 @@
-import styled from "styled-components";
-import { Button, Table } from "antd";
-import { useNavigate } from "react-router-dom";
+import React,{useState,useEffect} from 'react';
+import {GetAllProduct, CreateProduct, UpdateProduct} from '../../Services/Product.Services';
+import {IProductResult } from '../../Interfaces/IProductServices';
+import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 
-const HeaderProduct = styled.div`
-  background-color: #575fcf;
-  width: 100%;
-  max-width: 70%;
-  margin: 20px auto;
-  display: "flex";
-  flex-direction: "column";
-  padding: 0;
-  border-radius: 5px;
-  box-shadow: 0 0 7px 0 #ccc;
-  overflow: hidden;
-`;
+import { Button, Modal, Table } from 'antd';
+import ModalProduct from './CUProduct';
 
-const Wrapper = styled.div`
-  background-color: #435d7d;
-  color: #fff;
-  padding: 0px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
-const HeaderLeft = styled.div`
-  padding-bottom: 4px;
-  margin: 0;
-  color: #fff;
-  h2 {
-    color: #fff;
-    font-weight: 500;
-    margin: 5px 0;
-  }
-`;
-const HeaderRight = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 15px;
-`;
 
 const Product = () => {
-  return <div>list product</div>;
-};
+    const [products, setproducts] = useState<IProductResult[]>([]);
+    const [productedit, setproductedit] = useState({});
+    const [isOpenModal, setisOpenModal] = useState(false);
+    useEffect(() => {
+        const fetchData = async () => {
+            const results = await GetAllProduct();
+            setproducts(results);
+            
+          };
+          fetchData();
+    }, [])
+    const columns=[
+        {
+            key: 'productId',
+            title : 'Id',
+            dataIndex :'productId'
+        },
+        {
+            
+            key: 'productName',
+            title : 'Product name',
+            dataIndex :'productName'
+        },
+        {
+            
+            key: 'brandName',
+            title : 'Brand name',
+            dataIndex :'brandName'
+        },
+        {
+            
+            key: 'categgoryName',
+            title : 'Category name',
+            dataIndex :'categoryName'
+        },
+        {
+            
+            key: 'modelYear',
+            title :'Year',
+            dataIndex :'modelYear'
+        },
+        {
+            
+            key: 'listPrice',
+            title : 'Price',
+            dataIndex :'listPrice'
+        },
+        {
+            key :'action',
+            title : 'Action',
+            render : (record : any)=>
+            {
+                return<>
+                <EditOutlined onClick={()=>{showModal(record)}} />
+                <DeleteOutlined onClick={()=>handleDeleteProduct(record.id)} style={{color : "orange",marginLeft : 12}}/>
+                </> 
+            }
+        }
+    ]
+    const showModal =(record : any) =>
+    {
+        setisOpenModal(true);
+        setproductedit(record);
+    }
+    const hideModal = ()=>
+    {
+        setisOpenModal(false);
+    }
+    const handleDeleteProduct=(id : number)=>
+    {
+        Modal.confirm(
+            {
+                title :"Are u sure?",
+                okText :'Sure',
+                okType : 'danger',
+                onOk : ()=>
+                {
+                   
+                }
+            })
+    }
+    const handleFinish = async(values : any) =>{
+        const isEdit = products.findIndex((item) => item.productId = values.id)
+         if(isEdit<=0)
+         {
+            console.log(values);
+             await UpdateProduct(values.id,values)
+         }
+         else
+         {
+            await CreateProduct(values)
+         }
+         setisOpenModal(false)
+     }
+  return (
+    <>
+    <Button onClick={showModal}>Create Employee</Button>
+                {
+                    isOpenModal && <ModalProduct isCreate={isOpenModal} item={productedit} title = "Create" onCancel={hideModal} onFinish={handleFinish}>
+                    </ModalProduct>
+                }
+    <Table
+            columns={columns}
+            dataSource={products}
+            rowKey="productId"
+            />
+    </>
+  )
+}
 
-export default Product;
+export default Product

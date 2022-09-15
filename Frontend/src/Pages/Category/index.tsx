@@ -100,7 +100,8 @@ const Category = () => {
     <>
     <Button onClick={showModal}>Create Employee</Button>
                 {
-                    isOpenModal && <ModalPopup isCreate={isOpenModal} item={categoryEdit} title = "edwq" onCancel={hideModal} onFinish={handleFinish}>
+                    isOpenModal && 
+                    <ModalPopup isCreate={isOpenModal} item={categoryEdit} title = "CATEGORY" onCancel={hideModal} onFinish={handleFinish}>
                     </ModalPopup>
                 }
     <Table

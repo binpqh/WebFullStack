@@ -6,7 +6,7 @@ import Footer from "../Common/Footer";
 const LayoutProduct = () => {
   return (
     <div>
-      <Header content="Product Management" />
+      <Header content="Product" />
       <Outlet />
       <Footer />
     </div>

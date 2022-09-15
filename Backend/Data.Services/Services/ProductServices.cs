@@ -12,16 +12,18 @@ namespace Data.Services.Services
 {
     public class ProductServices : IProductServices
     {
-        public async Task<Product> CreateAsync(ProductType productType)
+        public async Task<Product> CreateAsync(ProductInput productType)
         {
             using (BikeStoresContext db = new BikeStoresContext())
             {
                 var product = new Product
                 { 
+                     
                     ProductName= productType.ProductName,
                     BrandId = productType.BrandId,
                     CategoryId =productType.CategoryId,
                     ListPrice = productType.ListPrice,
+                    ModelYear= productType.ModelYear,
 
                 };
                await db.Products.AddAsync(product);
@@ -53,9 +55,11 @@ namespace Data.Services.Services
             {
                 var list = await db.Products.Include(p => p.Brand).Include(p=>p.Category).Select(p=>new ProductResult
                 {
+                    ProductId = p.ProductId,    
                     ProductName = p.ProductName,
                     BrandName = p.Brand.BrandName, 
                     ListPrice= p.ListPrice,
+                    ModelYear=p.ModelYear,
                     CategoryName = p.Category.CategoryName, 
                 }).ToListAsync();
                 if(list!=null)
@@ -81,6 +85,7 @@ namespace Data.Services.Services
                     BrandName= p.Brand.BrandName,
                     CategoryName = p.Category.CategoryName,
                     ListPrice = p.ListPrice
+                    
 
                 }).FirstOrDefaultAsync();
                 if (product!=null)
@@ -92,18 +97,18 @@ namespace Data.Services.Services
                 throw new NotImplementedException();
         }
 
-        public async Task<ProductResult> UpdateAsync(int id, ProductType productType)
+        public async Task<ProductResult> UpdateAsync(int id, ProductInput productType)
         {
-            //dang tap trung hong un dau thoi uong i tui nhin khat dc
             using (BikeStoresContext db = new BikeStoresContext())
             {
                 var item =await db.Products.Where(p=>p.ProductId==id).FirstOrDefaultAsync();
                 if(item !=null)
                 {
-
+                    item.ProductId = productType.ProductId;
                     item.ProductName = productType.ProductName ?? item.ProductName;
                     item.BrandId = productType.BrandId ;
                     item.CategoryId = productType.CategoryId;
+                    item.ModelYear = productType.ModelYear; 
                     item.ListPrice = productType.ListPrice;
                     await db.SaveChangesAsync();
                 }    
@@ -113,9 +118,11 @@ namespace Data.Services.Services
                 }
                 var result = await db.Products.Include(p => p.Brand).Include(p => p.Category).Where(p => p.ProductId == id).Select(p => new ProductResult
                 {
+                    ProductId = p.ProductId,
                     ProductName = p.ProductName,
                     BrandName = p.Brand.BrandName,
                     CategoryName = p.Category.CategoryName,
+                    ModelYear = p.ModelYear,    
                     ListPrice = p.ListPrice
                 }).FirstOrDefaultAsync();
                 if(result==null)

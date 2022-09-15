@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Data.Services.Types
 {
-    public class ProductType
+    public class ProductInput
     {
-
+        public int ProductId { get; set; }
         public string ProductName { get; set; } = null!;
         public int BrandId { get; set; }
         public int CategoryId { get; set; }
@@ -17,6 +17,7 @@ namespace Data.Services.Types
     }
     public class ProductResult
     {
+        public int ProductId { get; set; }
         public string ProductName { get; set; } = null!;
         public string? BrandName { get; set; }
         public string? CategoryName { get; set; }

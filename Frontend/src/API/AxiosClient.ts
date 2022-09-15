@@ -1,10 +1,10 @@
-import axios, { AxiosRequestConfig, AxiosResponse }  from 'axios'
+import axios  from 'axios'
 const axiosClient = axios.create({
     baseURL : `https://localhost:7268/api`,
     headers :{
-        //'Context-type': 'application/json'
+        'Context-type': 'application/json'
     },
-   // withCredentials :true,
+    withCredentials :true,
 })
 // axiosClient.interceptors.request.use(
 //     async (config: AxiosRequestConfig) => {

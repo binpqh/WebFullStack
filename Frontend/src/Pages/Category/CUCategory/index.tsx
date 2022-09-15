@@ -6,15 +6,11 @@ const ModalPopup = ({title, item, isCreate, onCancel, onFinish, handleFail}:any)
     const [data, setData] = useState(item);
 
     const handleFinish = (values : any) => {
-        console.log("Modal said :"+data.categoryId,values.categoryName);
-        
         onFinish(data.categoryId,values)
     }
     useEffect(() => {
         item && setData(item)
     }, [item]);
-
-
   return (
     <>
     <Modal open={isCreate} title = {title} onCancel={onCancel}            

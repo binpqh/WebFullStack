@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { CreateCategory, GetAllCategory, UpdateCategory } from '../../Services/Category.Services';
+import { CreateCategory, GetAllCategory, UpdateCategory , DeteleCategory } from '../../Services/Category.Services';
 import { ICategoryResult } from './../../Interfaces/ICategoryServices';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 
@@ -61,6 +61,7 @@ const Category = () => {
                 onOk : ()=>
                 {
                     // gọi api delete rồi fetch data lại nè
+                     DeteleCategory(id);
                 }
             })
     }
@@ -68,11 +69,12 @@ const Category = () => {
         const isEdit = categories.find((item) => item.id = values.id)
          if(isEdit)
          {
-            console.log(values);
+             await console.log(values);
              await UpdateCategory(values.id,values)
          }
          else
          {
+             
             await CreateCategory(values)
          }
          setisOpenModal(false)
@@ -81,7 +83,8 @@ const Category = () => {
     <>
     <Button onClick={showModal}>Create Employee</Button>
                 {
-                    isOpenModal && <ModalPopup isCreate={isOpenModal} item={categoryEdit} title = "edwq" onCancel={hideModal} onFinish={handleFinish}>
+                    isOpenModal && 
+                    <ModalPopup isCreate={isOpenModal} item={categoryEdit} title = "CATEGORY" onCancel={hideModal} onFinish={handleFinish}>
                     </ModalPopup>
                 }
     <Table

@@ -1,10 +1,12 @@
-import axios, { AxiosRequestConfig, AxiosResponse }  from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse }  from 'axios';
+
 const axiosClient = axios.create({
-    baseURL : `https://localhost:7268/api`,
+    baseURL : process.env.REACT_APP_API_URL,
     headers :{
         'Context-type': 'application/json'
     },
-    withCredentials :true,
+    //withCredentials :true,
+    
 })
 axiosClient.interceptors.request.use(
     async (config: AxiosRequestConfig) => {
@@ -56,3 +58,4 @@ axiosClient.interceptors.request.use(
   );
   
 export default axiosClient;
+

@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LayoutCategory from "./Layouts/LayoutCategory";
 import LayoutProduct from "./Layouts/LayoutProduct";
 import Category from "./Pages/Category";
-import AddCategory from "./Pages/Category/AddCategory";
-import EditCategory from "./Pages/Category/EditCategory";
 import Product from "./Pages/Product";
 import AddProduct from "./Pages/Product/AddProduct";
 import UpdateProduct from "./Pages/Product/EditProduct";
@@ -23,8 +21,6 @@ function App() {
 
         <Route path="/category" element={<LayoutCategory />}>
           <Route index element={<Category />} />
-          <Route path="/category/add" element={<AddCategory />} />
-          <Route path="/category/edit/:categoryId" element={<EditCategory />} />
         </Route>
       </Routes>
     </div>

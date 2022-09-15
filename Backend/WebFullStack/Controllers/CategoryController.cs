@@ -26,14 +26,14 @@ namespace WebFullStack.Controllers
             return await _services.GetAllAsync();
         }
         [HttpPost]
-        public async Task<Category> CreateAsync(string nameCate)
+        public async Task<Category> CreateAsync([FromBody]string nameCate)
         {
             return await _services.CreateAsync(nameCate);
         }
         [HttpPut("{id:int}")]
-        public async Task<Category> UpdateAsync(int id, string nameCate)
+        public async Task<Category> UpdateAsync(int id,[FromBody]Category category)
         {
-            return await _services.UpdateAsync(id, nameCate);
+            return await _services.UpdateAsync(id, category.CategoryName);
         }
         [HttpDelete]
         public async Task DeleteAsync(int id)

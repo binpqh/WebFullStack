@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { CreateCategory, GetAllCategory, UpdateCategory } from '../../Services/Category.Services';
-import { ICategoryResult } from './../../Interfaces/ICategoryServices';
+import { ICategoryInput, ICategoryResult } from './../../Interfaces/ICategoryServices';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 
 import { Button, Modal, Table } from 'antd';
@@ -44,6 +44,8 @@ const Category = () => {
     ]
     const showModal =(record : any) =>
     {
+        console.log("chekc có id hon nè"+record.categoryId+record.categoryName);
+        
         setisOpenModal(true);
         setcategoryEdit(record);
     }
@@ -64,17 +66,20 @@ const Category = () => {
                 }
             })
     }
-    const handleFinish = async(values : any) =>{
-        const isEdit = categories.find((item) => item.id = values.id)
-         if(isEdit)
-         {
-            console.log(values);
-             await UpdateCategory(values.id,values)
-         }
-         else
-         {
-            await CreateCategory(values)
-         }
+    const handleFinish = async(id:number,values : any) =>{
+        console.log("Update method said :"+id + values.categoryName);
+        const isEdit = categories.find((item) => item.id ===id)
+        // console.log(values);
+        
+        //  if(isEdit)
+        //  {
+        //     console.log("Update method said :"+id + values.categoryName);
+            await UpdateCategory({...values, categoryId: id});
+        //  }
+        //  else
+        //  {
+        //     await CreateCategory(values)
+        //  }
          setisOpenModal(false)
      }
   return (

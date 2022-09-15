@@ -12,11 +12,11 @@ export const GetbyIdCategory = async(categoryId : number)=>
 };
 export const CreateCategory = async(categoryName : ICategoryInput)=>
 {
-    return(await axiosClient.post<ICategoryResult>(`/Category`,categoryName)).data;
+    return(await axiosClient.post<ICategoryResult>(`/Category`,{categoryName})).data;
 };
-export const UpdateCategory = async(categoryId : number,categoryName : ICategoryInput)=>
+export const UpdateCategory = async(category : any)=>
 {
-    return(await axiosClient.put<ICategoryResult>(`/Category/${categoryId}`,categoryName)).data;
+    return(await axiosClient.put<ICategoryResult>(`/Category/${category.categoryId}`,category)).data;
 };
 // export const DeteleCategory = async(categoryId : number)=>
 // {

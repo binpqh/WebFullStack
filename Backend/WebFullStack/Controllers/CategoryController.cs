@@ -26,7 +26,7 @@ namespace WebFullStack.Controllers
             return await _services.GetAllAsync();
         }
         [HttpPost]
-        public async Task<Category> CreateAsync([FromBody]Category cate) // nhận dữ liệu kiểu JSON -> FE phải truyền 1 object
+        public async Task<Category> CreateAsync([FromBody] string nameCate)
         {
             return await _services.CreateAsync(cate.CategoryName);
         }

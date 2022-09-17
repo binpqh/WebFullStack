@@ -4,7 +4,7 @@ import { ICategoryResult } from './../../Interfaces/ICategoryServices';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 
 import { Button, Modal, Table } from 'antd';
-import ModalPopup from './CUCategory';
+import ModalPopup from './ModelCategory';
 
 const Category = () => {
     const [categories, setCategories] = useState<ICategoryResult[]>([]);

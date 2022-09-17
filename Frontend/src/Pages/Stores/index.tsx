@@ -4,7 +4,7 @@ import { GetAllStore, DeteleStore, CreateStore, UpdateStore } from '../../Servic
 import { IStoreResult } from './../../Interfaces/IStoreServices';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Modal,Button, Table } from 'antd';
-import ModalStore from './CUStores';
+import ModalStore from './ModelStore';
 import { PlusOutlined  } from "@ant-design/icons";
 
 

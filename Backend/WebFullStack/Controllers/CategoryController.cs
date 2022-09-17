@@ -28,10 +28,10 @@ namespace WebFullStack.Controllers
         [HttpPost]
         public async Task<Category> CreateAsync([FromBody] string nameCate)
         {
-            return await _services.CreateAsync(cate.CategoryName);
+            return await _services.CreateAsync(nameCate);
         }
         [HttpPut("{id:int}")]
-        public async Task<Category> UpdateAsync(int id,[FromBody]Category category)
+        public async Task<Category> UpdateAsync(int id, [FromBody] Category category)
         {
             return await _services.UpdateAsync(id, category.CategoryName);
         }

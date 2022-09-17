@@ -14,7 +14,7 @@ export const CreateCategory = async(categoryName : any)=>
 {
     return(await axiosClient.post<ICategoryResult>(`/Category`,categoryName)).data;
 };
-export const UpdateCategory = async(category : any)=>
+export const UpdateCategory = async(category : ICategoryResult)=>
 {
     return(await axiosClient.put<ICategoryResult>(`/Category/${category.categoryId}`,category)).data;
 };

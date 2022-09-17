@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { CreateCategory, DeteleCategory, GetAllCategory, UpdateCategory } from "../../Services/Category.Services";
-import { ICategoryResult } from "./../../Interfaces/ICategoryServices";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-
 import { Button, Modal, Table } from "antd";
-import ModalPopup from "./CUCategory";
+import ModalPopup from "./ModalCategory";
+import { useDispatch, useSelector } from 'react-redux';
+import { createCategory, deteleCategory, fetchListCategory, listCategorySelect, updateCategory } from "./categorySlice";
 
 const Category = () => {
-  const [categories, setCategories] = useState<ICategoryResult[]>([]);
+  const dispatch = useDispatch<any>();
+  const categories = useSelector(listCategorySelect)
   const [categoryEdit, setcategoryEdit] = useState({});
   const [isOpenModal, setisOpenModal] = useState(false);
   useEffect(() => {
-    const fetchData = async () => {
-      const results = await GetAllCategory();
-      setCategories(results);
-    };
-    fetchData();
-  }, []);
+    // const fetchData = async () => {
+    //   const results = await GetAllCategory();
+    //   setCategories(results);
+    // };
+    // fetchData();
+    dispatch(fetchListCategory())
+  });
   const columns = [
     {
       key: "categoryId",
@@ -60,33 +61,33 @@ const Category = () => {
       okText: "Sure",
       okType: "danger",
       onOk: async () => {
-        await console.log(record.categoryId);
-        await DeteleCategory(record);
+        await dispatch(deteleCategory(record))
       },
     });
   };
   const handleFinish = async (id: number, values: any) => {
-    const isEdit = categories.findIndex((item) => item.categoryId === id);
+    const isEdit = categories.findIndex((item : any) => item.categoryId === id);
 
     if (isEdit >= 0) {
-      await UpdateCategory({ categoryId: id, ...values })
-        .then((res) => {
-          const newlistCate = categories.map((item) => {
-            if (item.categoryId === id) {
-              item.categoryName = values.categoryName;
-            }
-            return item;
-          });
-          setCategories(newlistCate);
-        })
-        .catch((error) => {})
-        .finally(() => {
-          setisOpenModal(false);
-        });
+      await dispatch(updateCategory(values));
+      // await UpdateCategory({ categoryId: id, ...values })
+      //   .then((res) => {
+      //     const newlistCate = categories.map((item : any) => {
+      //       if (item.categoryId === id) {
+      //         item.categoryName = values.categoryName;
+      //       }
+      //       return item;
+      //     });
+      //     //setCategories(newlistCate);
+      //   })
+      //   .catch((error) => {})
+      //   .finally(() => {
+      //     setisOpenModal(false);
+      //   });
     } else {
-      await CreateCategory(values);
-      setisOpenModal(false);
+      await dispatch(createCategory(values));
     }
+    setisOpenModal(false);
   };
   return (
     <>

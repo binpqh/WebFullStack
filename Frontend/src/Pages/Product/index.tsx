@@ -4,7 +4,7 @@ import {IProductResult } from '../../Interfaces/IProductServices';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 
 import { Button, Modal, Table } from 'antd';
-import ModalProduct from './CUProduct';
+import ModalProduct from './ModalProduct';
 
 
 const Product = () => {

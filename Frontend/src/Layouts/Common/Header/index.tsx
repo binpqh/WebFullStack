@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, Table } from "antd";
+import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
 interface Props {

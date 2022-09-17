@@ -9,7 +9,7 @@ const StyleSpan = styled.span`
 const Footer = () => {
   return (
     <footer>
-      <StyleSpan>All Rights Reserved 2022 @</StyleSpan>
+      <StyleSpan>.NET TEAM 1 - BESTARION 2022 @</StyleSpan>
     </footer>
   );
 };

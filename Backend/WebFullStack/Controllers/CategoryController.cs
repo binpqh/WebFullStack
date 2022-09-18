@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebFullStack.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
+
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryServices _services;

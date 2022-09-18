@@ -362,4 +362,3 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 Backend/Data.Services/BikeStoresContext.cs
-Backend/Data.Services/BikeStoresContext.cs

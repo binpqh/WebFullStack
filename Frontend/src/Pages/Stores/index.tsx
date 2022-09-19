@@ -1,5 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
+import { GetAllStore, DeteleStore, CreateStore, UpdateStore } from '../../Services/Stores.Services';
+import { IStoreResult } from './../../Interfaces/IStoreServices';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Modal,Button, Table } from 'antd';
 import ModalStore from './ModalStore';
@@ -135,6 +137,8 @@ const Store = () => {
                     await dispatch(deteleStore(record));
                     
                 }
+                
+
             })
 
 

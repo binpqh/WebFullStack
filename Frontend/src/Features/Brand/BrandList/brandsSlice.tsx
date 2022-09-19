@@ -80,5 +80,5 @@ export const deleteBrand = createAsyncThunk("brands/deleteBrand", async (brandId
 
   return result.resultObj;
 });
-
+export const listBrandsSelect = (state: any) => state.BrandsSlice.data;
 export default BrandsSlice;

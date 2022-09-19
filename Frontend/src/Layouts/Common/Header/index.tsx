@@ -18,6 +18,9 @@ const Wrapper = styled.div`
 `;
 
 const HeaderLeft = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   padding-bottom: 4px;
   color: #fff;
   h2 {
@@ -61,16 +64,18 @@ const Header: React.FC<Props> = (props) => {
     navigate("/");
   };
 
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <header>
       <Wrapper>
         <HeaderLeft>
-          <h2 onClick={handleTitle}>
+          {/* <h2 onClick={handleTitle}>
             <strong>{props.content}</strong> Management
-          </h2>
-        </HeaderLeft>
+          </h2> */}
 
-        <HeaderRight>
           <Button onClick={handleProduct} style={{ color: "white" }}>
             Product
           </Button>
@@ -85,6 +90,12 @@ const Header: React.FC<Props> = (props) => {
 
           <Button onClick={handleBrand} style={{ color: "white" }}>
             Brand
+          </Button>
+        </HeaderLeft>
+
+        <HeaderRight>
+          <Button onClick={handleLogin} style={{ color: "white" }}>
+            Login
           </Button>
         </HeaderRight>
       </Wrapper>

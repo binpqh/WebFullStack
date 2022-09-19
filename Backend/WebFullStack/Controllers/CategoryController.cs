@@ -28,7 +28,8 @@ namespace WebFullStack.Controllers
             return await _services.GetAllAsync();
         }
         [HttpPost]
-        public async Task<Category> CreateAsync([FromBody] Category cate)
+
+        public async Task<Category> CreateAsync([FromBody]Category cate)
 
         {
 

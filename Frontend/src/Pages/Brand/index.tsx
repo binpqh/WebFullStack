@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Filters from "../../Components/Filters";
 import BrandModal from "./BrandModal";
 import { BrandClass } from "../../Interfaces/BrandClass";
-import { brandsRemainingSelector } from "../../app/selectors";
-import { deleteBrand } from "../../Features/Brand/BrandList/brandsSlice";
+//import { brandsRemainingSelector } from "../../app/selectors";
+import { deleteBrand,listBrandsSelect } from "../../Features/Brand/BrandList/brandsSlice";
 //import Message from "../../Interfaces/Common/Message";
 
 const HeaderPageBrand = styled.div`
@@ -60,7 +60,7 @@ const Brand = () => {
   const [brandEdit, setBrandEdit] = useState<BrandClass>();
   const [brands, setBrands] = useState<BrandClass[] | undefined>([]);
 
-  const getBrands = useSelector(brandsRemainingSelector);
+  const getBrands = useSelector(listBrandsSelect);
 
   useEffect(() => {
     setBrands(getBrands);

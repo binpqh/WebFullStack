@@ -14,13 +14,7 @@ export const fetchListStores = createAsyncThunk(
         return await GetAllStore();
     }
 )
-export const deteleStore = createAsyncThunk(
-    'Stores/deleteData',
-    async (store: IStoreResult) => {
-       
-        return await DeteleStore(store);
-    }
-)
+
 export const createStore= createAsyncThunk(
     'Stores/createData',
    async (store : IStoreResult) => {
@@ -33,6 +27,13 @@ export const updateStore = createAsyncThunk(
     async (store : IStoreResult) => {
         console.log("updata data : ",store.storeId);
         return await UpdateStore(store);
+    }
+)
+export const deteleStore = createAsyncThunk(
+    'Stores/deleteData',
+    async (store: IStoreResult) => {
+       
+        return await DeteleStore(store);
     }
 )
 

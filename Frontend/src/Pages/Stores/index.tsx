@@ -1,27 +1,25 @@
 
 import React, { useState, useEffect } from 'react';
-import { GetAllStore, DeteleStore, CreateStore, UpdateStore } from '../../Services/Stores.Services';
-import { IStoreResult } from './../../Interfaces/IStoreServices';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Modal,Button, Table } from 'antd';
-import ModalStore from './ModelStore';
+import ModalStore from './ModalStore';
 import { PlusOutlined  } from "@ant-design/icons";
-
-
-
-
+import { useAppSelector, useAppDispatch } from '../../app/hook';
+import { fetchListStores,listStoreSelect,updateStore,deteleStore,createStore} from "./storeSlice";
 const Store = () => {
-    const [stores, setStores] = useState<IStoreResult[]>([]);
+
+  
+
+    const stores  = useAppSelector(listStoreSelect);
+    const dispatch = useAppDispatch();
     const [storesEdit, setstoresEdit] = useState({});
     const [isOpenModal, setisOpenModal] = useState(false);
-    useEffect(() => {
-        const fetchData = async () => {
-            const results = await GetAllStore();
-            setStores(results);
-
-        };
-        fetchData();
-    }, [stores])
+    
+    useEffect(()=>
+    {
+        dispatch(fetchListStores());
+       
+    })
 
     const columns = [
         {
@@ -80,9 +78,7 @@ const Store = () => {
     ]
     const showModal =(record : any) =>
     {
-         console.log("idStore: "+record.storeId);
-        // console.log("ListStore: "+JSON.stringify(record));
-        
+        console.log("idStore: "+record.storeId);
         setisOpenModal(true);
         setstoresEdit(record);
     }
@@ -97,57 +93,42 @@ const Store = () => {
                 okText: 'Sure',
                 okType: 'danger',
                 onOk: async () => {
-                    await console.log("idStore:", record.storeId);
-                    await DeteleStore(record);
+                    await dispatch(deteleStore(record));
                     
                 }
-                
-
             })
 
 
     }
 
     const handleFinish = async(id:number,values : any) =>{
-            const isEdit = stores.findIndex((item)=> item.storeId === id)
-         if(isEdit >= 0)
+         const isEdit = stores.findIndex((item:any)=> item.storeId === id)
+         if(isEdit>=0)
          {
-            await UpdateStore({storeId: id,...values})
-            .then((res) =>
-            {
-                const newlistCate = stores.map((item)=>
-                {
-                    if(item.storeId === id)
-                    {
-                       item.storeName=values.storeName;
-                       item.phone=values.phone;
-                       item.email=values.emails;
-                       item.city=values.city;
-                       item.street=values.street;
-                       item.state=values.state;
-                       item.zipCode=values.zipCode;
-                    }
-                    return item;
-                })
-                setStores(newlistCate);
-            }).catch((error)=>
-            {
-            }).finally(() => {
-                setisOpenModal(false);
-              });
+             await dispatch(updateStore({storeId: id,...values}));
+             setisOpenModal(false);
          }
          else
          {
-            
-        //await console.log("ListStoreCreate: "+JSON.stringify(values));
-        await CreateStore(values);
-
-        setisOpenModal(false);
-
+            await dispatch(createStore(values));
+            setisOpenModal(false);
          }
-       
      }
-
+     const rowSelection = {
+        onChange: (selectedRowKeys:any, selectedRows:any) => {
+          console.log(
+            `selectedRowKeys: ${selectedRowKeys}`,
+            "selectedRows: ",
+            selectedRows
+          );
+        },
+        getCheckboxProps:(record:any)  => ({
+          disabled: record.name === "Disabled User", // Column configuration not to be checked
+          name: record.name,
+          className: "checkbox-red"
+        })
+      };
+      
     return (
         <>
             <Button onClick={showModal} type="primary" danger icon={<PlusOutlined />}>Create Store</Button>
@@ -156,7 +137,7 @@ const Store = () => {
                 <ModalStore   isCreate={isOpenModal} item={storesEdit} title="Store" onCancel={hideModal} onFinish={handleFinish} >
                 </ModalStore>
             }
-            <Table columns={columns} dataSource={stores} rowKey="storeId" />
+            <Table rowSelection={rowSelection} columns={columns} dataSource={stores} rowKey="storeId" />
         </>
 
 

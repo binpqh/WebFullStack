@@ -7,13 +7,12 @@ import Store from "./Pages/Stores";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Category/>}/>
-        <Route path='/store' element={<Store />}/>
+  
+         <Routes>
+         <Route path='/' element={<Store />}/>
+        <Route path='/Category' element={<Category/>}/>
         <Route path='/product' element={<Product/>}/>
       </Routes>
-  </Router>
     
   );
 }

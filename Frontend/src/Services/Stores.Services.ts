@@ -8,13 +8,20 @@ export const GetAllStore = async()=>
        
 };
 
-  
-export const DeteleStore = async(storeId : number)=>
+export const DeteleStore = async(cate : any)=>
 {
-    //console.log("delete",storeId);
-    return(await axiosClient.delete(`/Stores/${storeId}`)).data;
-    
+    return(await axiosClient.delete(`/Stores/${cate.storeId}`)).data;
     
 };
+export const CreateStore = async(store : any)=>
+{
+    
+     return(await axiosClient.post<IStoreResult>(`/Stores`,store)).data;
+};
 
+export const UpdateStore = async(store : any)=>
+{
+    //console.log("updateID: ",store.storeId);
+    return(await axiosClient.put<IStoreResult>(`/Stores/${store.storeId}`,store)).data;
+};
 

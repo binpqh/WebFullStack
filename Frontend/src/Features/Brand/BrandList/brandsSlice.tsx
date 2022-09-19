@@ -48,6 +48,7 @@ const BrandsSlice = createSlice({
           brands: newBrands,
         };
       });
+     
   },
 });
 

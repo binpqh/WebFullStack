@@ -45,20 +45,20 @@ const Header: React.FC<Props> = (props) => {
     navigate("/");
   };
 
-  const handleProduct = () => {
-    navigate("/");
-  };
+
 
   const handleCategory = () => {
     navigate("/category");
   };
-
+  const handleProduct = () => {
+    navigate("/product");
+  };
   const handleBrand = () => {
     navigate("/brand");
   };
 
   const handleStore = () => {
-    navigate("/store");
+    navigate("/");
   };
 
   return (

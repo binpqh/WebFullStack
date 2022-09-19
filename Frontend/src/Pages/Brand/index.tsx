@@ -1,4 +1,3 @@
-//author: hiki
 import styled from "styled-components";
 import { Button, Table, Modal } from "antd";
 import { useState, useEffect } from "react";
@@ -148,7 +147,7 @@ const Brand = () => {
             />
             <DeleteOutlined
               onClick={() => handleDeleteCategory(brand)}
-              style={{ color: "#ff3838", marginLeft: 7, cursor: "pointer" }}
+              style={{ color: "orange", marginLeft: 7, cursor: "pointer" }}
             />
           </div>
         );
@@ -184,7 +183,7 @@ const Brand = () => {
       <Table
         rowSelection={rowSelection}
         pagination={{
-          position: ["bottomCenter"],
+          // position: ["bottomCenter"],
         }}
         columns={columns}
         dataSource={brands}

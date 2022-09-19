@@ -62,10 +62,10 @@ const StoreSlice = createSlice({
             .addCase(deteleStore.pending, (state: any) => {
                 state.loading = true;
             })
-        builder
-            .addCase(deteleStore.fulfilled, (state: any, action: any) => {
-                state.loading = false;//cap nhat trang thai
-                state.data = [...action.payload]// update lai dl
+        builder.addCase(deteleStore.fulfilled, (state: any, action: any) => {
+                state.loading = false;
+                let store = state.data.filter((item: any) => item.storeId === action.payload.storeId);
+                store =action.payload;
             });
 
         builder

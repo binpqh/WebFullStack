@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -12,10 +11,10 @@ import Store from "./Pages/Stores";
 import Brand from "./Pages/Brand";
 import Login from "./Pages/Auth/Login";
 import { fetchBrands } from "./Features/Brand/BrandList/brandsSlice";
+import { PrivateRoute } from "./Layouts/PrivateRoute";
 
 function App() {
   const dispatch = useDispatch<any>();
-
   useEffect(() => {
     dispatch(fetchBrands());
   }, []);
@@ -23,6 +22,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+      <Route element={<PrivateRoute roles={["Admin"]} />}>
         <Route path="/" element={<LayoutDefault content="Product" />}>
           <Route index element={<Product />} />;
         </Route>
@@ -37,10 +37,11 @@ function App() {
         </Route>
 
         <Route path="/login" element={<LayoutDefault content="Login" />}>
-          <Route index element={<Login />} />;
+        <Route path="login" element={<Login/>} />
         </Route>
-        {/* <Route path='/' element={<Store />}/>
-        <Route path='/' element={<Product/>}/> */}
+        {/* khúc này thêm 1 page k có quyền khi mà chưa login
+         <Route path={'not-auth'} element={<NotAuth />} /> */}
+        </Route>
       </Routes>
     </div>
   );

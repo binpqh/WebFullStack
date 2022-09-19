@@ -7,6 +7,9 @@ import { WrapForm, FormFooter } from "../../../Components/StyleForm";
 import { WrapInput } from "../../../Components/StyleInput";
 import { Card } from "../../../Components/Card";
 import { Button } from "../../../Components/StyleButton";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../app/hook";
+import { isLogin, login } from "./AuthSlice/authSlice";
 
 const Title = styled.h1`
   color: #3d3d3d;
@@ -17,10 +20,29 @@ const Title = styled.h1`
 `;
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(isLogin);
   const [data, setData] = useState<LoginDataRequest>();
 
-  const handleFinish = (user: LoginDataRequest) => {
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/');
+    }
+  });
+
+  const handleFinish = async (user: LoginDataRequest) => {
     console.log(user);
+    try {
+      await dispatch(
+        login({
+          username: user.uid,
+          password: user.password,
+        })
+      )
+    } catch (error: any) {
+      console.log(error.desc);
+    }
   };
 
   return (

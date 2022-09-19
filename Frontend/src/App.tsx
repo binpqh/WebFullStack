@@ -8,13 +8,14 @@ import Store from "./Pages/Stores";
 function App() {
   return (
     <div className="App">
+      <Router>
       <Routes>
         <Route path='/' element={<Category/>}/>
         <Route path='/store' element={<Store />}/>
         <Route path='/product' element={<Product/>}/>
       </Routes>
   </Router>
-    
+    </div>
   );
 }
 

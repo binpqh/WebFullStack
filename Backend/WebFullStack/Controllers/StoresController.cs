@@ -1,6 +1,7 @@
 ﻿using Data.Services.Interfaces;
 using Data.Services.Models;
 using Data.Services.Types;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,17 +26,18 @@ namespace WebFullStack.Controllers
         {
             return await _services.GetAllAsync();
         }
+       
         [HttpPost]
-        public async Task<Store> CreateAsync(StoreTypes create)
+        public async Task<Store> CreateAsync([FromBody] StoreTypes store)
         {
-            return await _services.CreateAsync(create);
+            return await _services.CreateAsync(store);
         }
         [HttpPut("{id:int}")]
-        public async Task<Store> UpdateAsync(int id, StoreTypes update)
+        public async Task<Store> UpdateAsync(int id, [FromBody] StoreTypes update)
         {
             return await _services.UpdateAsync(id, update);
         }
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public async Task DeleteAsync(int id)
         {
             await _services.DeleteAsync(id);

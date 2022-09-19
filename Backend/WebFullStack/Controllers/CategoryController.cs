@@ -29,7 +29,7 @@ namespace WebFullStack.Controllers
         }
         [HttpPost]
         public async Task<Category> CreateAsync([FromBody] Category cate)
-        {
+      {
             return await _services.CreateAsync(cate.CategoryName);
         }
         [HttpPut("{id:int}")]

@@ -6,7 +6,7 @@ export const store = configureStore({
   reducer: {
     //counter: counterReducer,
 
-    categorySlice : categorySlice.reducer
+    categorySlide : categorySlice.reducer
 
   },
 });

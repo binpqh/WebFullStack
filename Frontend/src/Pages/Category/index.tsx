@@ -10,16 +10,24 @@ import { useAppSelector } from "../../app/hook";
 const Category = () => {
   const dispatch = useDispatch<any>();
   const [categoryEdit, setcategoryEdit] = useState({});
-  const [categories, setCategories] = useState<ICategoryResult[] | undefined>([]);
+  const [categories, setCategories] = useState<ICategoryResult[]>([]);
   const [isOpenModal, setisOpenModal] = useState(false);
   const getCategory = useAppSelector(listCategorySelect);
+  
   useEffect(() => {
-    //console.log(fetchListCategory);
-   
-    // hỏng api
-    dispatch(fetchListCategory());
-    setCategories(getCategory);
+       dispatch(fetchListCategory()); 
   },[]);
+
+  useEffect(() => {
+    const fetchData = async()=>
+    {
+      await setCategories(getCategory);
+    }
+    fetchData();
+    console.log("listcate : ",getCategory);
+    
+     
+  },[getCategory]);
   const columns = [
     {
       key: "categoryId",

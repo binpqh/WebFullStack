@@ -51,8 +51,9 @@ const categorySlice = createSlice({
         .addCase(fetchListCategory.fulfilled,(state :any , action)=>
         {
             console.log("slice said :",action.payload);
-            
+           
             state.listcate = action.payload
+            console.log("state said :",state.listcate);
         })
         .addCase(fetchListCategory.rejected,(state :any , action)=>
         {

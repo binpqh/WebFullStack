@@ -38,9 +38,9 @@ namespace WebFullStack.Controllers
             return await _services.UpdateAsync(id, category.CategoryName);
         }
         [HttpDelete("{id:int}")]
-        public async Task DeleteAsync(int id)
+        public async Task<Category> DeleteAsync(int id)
         {
-            await _services.DeleteAsync(id);
+            return await _services.DeleteAsync(id);
         }
     }
 }

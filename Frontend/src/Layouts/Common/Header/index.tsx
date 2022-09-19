@@ -57,6 +57,10 @@ const Header: React.FC<Props> = (props) => {
     navigate("/brand");
   };
 
+  const handleStore = () => {
+    navigate("/store");
+  };
+
   return (
     <header>
       <Wrapper>
@@ -69,6 +73,10 @@ const Header: React.FC<Props> = (props) => {
         <HeaderRight>
           <Button onClick={handleProduct} style={{ color: "white" }}>
             Product
+          </Button>
+
+          <Button onClick={handleStore} style={{ color: "white" }}>
+            Store
           </Button>
 
           <Button onClick={handleCategory} style={{ color: "white" }}>

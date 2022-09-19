@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Filters from "../../Components/Filters";
 import BrandModal from "./BrandModal";
 import { BrandClass } from "../../Interfaces/BrandClass";
-import { brandsRemainingSelector } from "../../Redux/selectors";
+import { brandsRemainingSelector } from "../../app/selectors";
 import { deleteBrand } from "../../Features/Brand/BrandList/brandsSlice";
 //import Message from "../../Interfaces/Common/Message";
 

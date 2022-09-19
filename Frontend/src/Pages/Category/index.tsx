@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal, Table } from "antd";
 import ModalPopup from "./ModalCategory";
-import { useDispatch, useSelector } from 'react-redux';
-import { createCategory, deteleCategory, fetchListCategory, listCategorySelect, updateCategory } from "./categorySlice";
-import { ICategoryResult } from './../../Interfaces/ICategoryServices';
+import { useDispatch, useSelector } from "react-redux";
+import { createCategory, deleteCategory, fetchListCategory, listCategorySelect, updateCategory } from "./categorySlice";
+import { ICategoryResult } from "./../../Interfaces/ICategoryServices";
 import { useAppSelector } from "../../app/hook";
 
 const HeaderPageCategory = styled.div`
@@ -51,17 +51,22 @@ const HeaderRight = styled.div`
 const Category = () => {
   const dispatch = useDispatch<any>();
   const [categoryEdit, setcategoryEdit] = useState({});
-  const [categories, setCategories] = useState<ICategoryResult[] | undefined>([]);
+  const [categories, setCategories] = useState<ICategoryResult[]>([]);
   const [isOpenModal, setisOpenModal] = useState(false);
 
-  const getCategory = useAppSelector(listCategorySelect);
+  const getCategory = useSelector(listCategorySelect);
+
   useEffect(() => {
-    //console.log(fetchListCategory);
-   
-    // hỏng api
     dispatch(fetchListCategory());
-    setCategories(getCategory);
-  },[]);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await setCategories(getCategory);
+    };
+    fetchData();
+    console.log("listcate : ", getCategory);
+  }, [getCategory]);
 
   const columns = [
     {
@@ -106,33 +111,23 @@ const Category = () => {
       okText: "Sure",
       okType: "danger",
       onOk: async () => {
-        await dispatch(deteleCategory(record))
+        await dispatch(deleteCategory(record));
       },
     });
   };
   const handleFinish = async (id: number, values: any) => {
-    // const isEdit = categories.findIndex((item : any) => item.categoryId === id);
+    const isEdit = categories.findIndex((item: any) => item.categoryId === id);
+    if (isEdit >= 0) {
+      const payload: ICategoryResult = {
+        categoryId: id,
+        categoryName: values.categoryName,
+      };
 
-    // if (isEdit >= 0) {
-    //   await dispatch(updateCategory(values));
-    //   // await UpdateCategory({ categoryId: id, ...values })
-    //   //   .then((res) => {
-    //   //     const newlistCate = categories.map((item : any) => {
-    //   //       if (item.categoryId === id) {
-    //   //         item.categoryName = values.categoryName;
-    //   //       }
-    //   //       return item;
-    //   //     });
-    //   //     //setCategories(newlistCate);
-    //   //   })
-    //   //   .catch((error) => {})
-    //   //   .finally(() => {
-    //   //     setisOpenModal(false);
-    //   //   });
-    // } else {
-    //   await dispatch(createCategory(values));
-    // }
-    // setisOpenModal(false);
+      await dispatch(updateCategory(payload));
+    } else {
+      await dispatch(createCategory(values));
+    }
+    setisOpenModal(false);
   };
   return (
     <HeaderPageCategory>
@@ -143,7 +138,7 @@ const Category = () => {
 
         <HeaderRight>
           <Wrapper>
-            <Button onClick={showModal}>Create Employee</Button>
+            <Button onClick={showModal}>Create Category</Button>
             {isOpenModal && (
               <ModalPopup
                 isCreate={isOpenModal}

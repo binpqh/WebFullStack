@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import Category from './Pages/Category';
 import Product from './Pages/Product';
+import Brand from './Pages/Brand';
 
 function App() {
   return (

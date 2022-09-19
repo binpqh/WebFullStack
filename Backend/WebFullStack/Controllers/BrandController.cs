@@ -8,38 +8,38 @@ namespace WebFullStack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class BrandController : ControllerBase
     {
-        private readonly IProductServices _services;
-        public ProductController(IProductServices services)
+        private readonly IBrandServices _services;
+        public BrandController(IBrandServices services)
         {
             _services = services;
         }
         [HttpGet("{id:int}")]
-        public async Task<ProductResult> GetByIdAsync(int id)
+        public async Task<Brand> GetByIdAsync(int id)
         {
             return await _services.GetByIdAsync(id);
         }
         [HttpGet]
-        public async Task<List<ProductResult>> GetAllAsync()
+        public async Task<List<Brand>> GetAllAsync()
         {
             return await _services.GetAllAsync();
         }
         [HttpPost]
-        public async Task<Product> CreateAsync(ProductInput productType)
+        public async Task<Brand> CreateAsync(Brand brandInput)
         {
-            return await _services.CreateAsync(productType);
+            return await _services.CreateAsync(brandInput);
         }
         [HttpPut("{id:int}")]
-        public async Task<ProductResult> UpdateAsync(int id, [FromBody] ProductInput product)
+        public async Task<Brand> UpdateAsync(int id, [FromBody] Brand brand)
         {
-            return await _services.UpdateAsync(id, product);
+            return await _services.UpdateAsync(id, brand);
         }
-
         [HttpDelete("{id:int}")]
         public async Task DeleteAsync(int id)
         {
             await _services.DeleteAsync(id);
         }
+
     }
 }

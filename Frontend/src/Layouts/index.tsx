@@ -1,1 +1,1 @@
-export { default } from "./LayoutCategory";
+export { default } from "./LayoutDefault";

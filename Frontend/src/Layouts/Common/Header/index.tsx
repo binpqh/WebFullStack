@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { Button } from "antd";
+
 import { useNavigate } from "react-router-dom";
+
+import Button from "@mui/material/Button";
 
 interface Props {
   content: string;
@@ -51,6 +53,10 @@ const Header: React.FC<Props> = (props) => {
     navigate("/category");
   };
 
+  const handleBrand = () => {
+    navigate("/brand");
+  };
+
   return (
     <header>
       <Wrapper>
@@ -61,10 +67,16 @@ const Header: React.FC<Props> = (props) => {
         </HeaderLeft>
 
         <HeaderRight>
-          <Button onClick={handleProduct}>Product</Button>
+          <Button onClick={handleProduct} style={{ color: "white" }}>
+            Product
+          </Button>
 
-          <Button danger onClick={handleCategory}>
+          <Button onClick={handleCategory} style={{ color: "white" }}>
             Category
+          </Button>
+
+          <Button onClick={handleBrand} style={{ color: "white" }}>
+            Brand
           </Button>
         </HeaderRight>
       </Wrapper>

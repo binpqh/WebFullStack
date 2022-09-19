@@ -1,3 +1,4 @@
+//author: hiki
 import styled from "styled-components";
 import { Button, Table, Modal } from "antd";
 import { useState, useEffect } from "react";
@@ -7,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Filters from "../../Components/Filters";
 import BrandModal from "./BrandModal";
 import { BrandClass } from "../../Interfaces/BrandClass";
-//import { brandsRemainingSelector } from "../../app/selectors";
-import { deleteBrand,listBrandsSelect } from "../../Features/Brand/BrandList/brandsSlice";
+import { brandsRemainingSelector } from "../../app/selectors";
+import { deleteBrand } from "../../Features/Brand/BrandList/brandsSlice";
 //import Message from "../../Interfaces/Common/Message";
 
 const HeaderPageBrand = styled.div`
@@ -60,7 +61,7 @@ const Brand = () => {
   const [brandEdit, setBrandEdit] = useState<BrandClass>();
   const [brands, setBrands] = useState<BrandClass[] | undefined>([]);
 
-  const getBrands = useSelector(listBrandsSelect);
+  const getBrands = useSelector(brandsRemainingSelector);
 
   useEffect(() => {
     setBrands(getBrands);
@@ -147,7 +148,7 @@ const Brand = () => {
             />
             <DeleteOutlined
               onClick={() => handleDeleteCategory(brand)}
-              style={{ color: "orange", marginLeft: 7, cursor: "pointer" }}
+              style={{ color: "#ff3838", marginLeft: 7, cursor: "pointer" }}
             />
           </div>
         );
@@ -183,7 +184,7 @@ const Brand = () => {
       <Table
         rowSelection={rowSelection}
         pagination={{
-          // position: ["bottomCenter"],
+          position: ["bottomCenter"],
         }}
         columns={columns}
         dataSource={brands}

@@ -2,10 +2,13 @@
 import axiosClient from "../API/AxiosClient";
 import { BrandClass } from "../Interfaces/BrandClass";
 import ApiResponse from "../Interfaces/Common/ApiResponse";
+import axios from "axios";
 
+const token = localStorage.getItem("token");
 const axiosConfig = {
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${token != null ? token : ""}`,
   },
 };
 
@@ -14,14 +17,19 @@ export const GetAllBrands = async () => {
 };
 
 export const CreateBrand = async (brandName: any) => {
-  return (await axiosClient.post<ApiResponse<BrandClass>>(`/Brands/create`, JSON.stringify(brandName), axiosConfig))
-    .data;
+  return (
+    await axios.post<ApiResponse<BrandClass>>(
+      `${process.env.REACT_APP_API_URL}/Brands/create`,
+      JSON.stringify(brandName),
+      axiosConfig
+    )
+  ).data;
 };
 
 export const UpdateBrand = async (brand: BrandClass) => {
   return (
-    await axiosClient.put<ApiResponse<BrandClass>>(
-      `/Brands/update/${brand.brandId}`,
+    await axios.put<ApiResponse<BrandClass>>(
+      `${process.env.REACT_APP_API_URL}/Brands/update/${brand.brandId}`,
       JSON.stringify(brand.brandName),
       axiosConfig
     )

@@ -48,8 +48,6 @@ const Header: React.FC<Props> = (props) => {
     navigate("/");
   };
 
-
-
   const handleCategory = () => {
     navigate("/category");
   };
@@ -76,12 +74,12 @@ const Header: React.FC<Props> = (props) => {
             <strong>{props.content}</strong> Management
           </h2> */}
 
-          <Button onClick={handleProduct} style={{ color: "white" }}>
-            Product
-          </Button>
-
           <Button onClick={handleStore} style={{ color: "white" }}>
             Store
+          </Button>
+
+          <Button onClick={handleProduct} style={{ color: "white" }}>
+            Product
           </Button>
 
           <Button onClick={handleCategory} style={{ color: "white" }}>

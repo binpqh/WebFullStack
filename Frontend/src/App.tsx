@@ -10,6 +10,7 @@ import Product from "./Pages/Product";
 import Category from "./Pages/Category";
 import Store from "./Pages/Stores";
 import Brand from "./Pages/Brand";
+import Login from "./Pages/Auth/Login";
 import { fetchBrands } from "./Features/Brand/BrandList/brandsSlice";
 
 function App() {
@@ -34,10 +35,13 @@ function App() {
         <Route path="/brand" element={<LayoutDefault content="Brand" />}>
           <Route index element={<Brand />} />;
         </Route>
+
+        <Route path="/login" element={<LayoutDefault content="Login" />}>
+          <Route index element={<Login />} />;
+        </Route>
         {/* <Route path='/' element={<Store />}/>
         <Route path='/' element={<Product/>}/> */}
       </Routes>
-      
     </div>
   );
 }

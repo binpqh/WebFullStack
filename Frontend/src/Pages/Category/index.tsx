@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal, Table } from "antd";
 import ModalPopup from "./ModalCategory";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createCategory, deteleCategory, fetchListCategory, listCategorySelect, updateCategory } from "./categorySlice";
 import { ICategoryResult } from './../../Interfaces/ICategoryServices';
 import { useAppSelector } from "../../app/hook";
@@ -118,28 +118,28 @@ const Category = () => {
     });
   };
   const handleFinish = async (id: number, values: any) => {
-    // const isEdit = categories.findIndex((item : any) => item.categoryId === id);
+    const isEdit = categories.findIndex((item : any) => item.categoryId === id);
 
-    // if (isEdit >= 0) {
-    //   await dispatch(updateCategory(values));
-    //   // await UpdateCategory({ categoryId: id, ...values })
-    //   //   .then((res) => {
-    //   //     const newlistCate = categories.map((item : any) => {
-    //   //       if (item.categoryId === id) {
-    //   //         item.categoryName = values.categoryName;
-    //   //       }
-    //   //       return item;
-    //   //     });
-    //   //     //setCategories(newlistCate);
-    //   //   })
-    //   //   .catch((error) => {})
-    //   //   .finally(() => {
-    //   //     setisOpenModal(false);
-    //   //   });
-    // } else {
-    //   await dispatch(createCategory(values));
-    // }
-    // setisOpenModal(false);
+    if (isEdit >= 0) {
+      await dispatch(updateCategory(values));
+      // await UpdateCategory({ categoryId: id, ...values })
+      //   .then((res) => {
+      //     const newlistCate = categories.map((item : any) => {
+      //       if (item.categoryId === id) {
+      //         item.categoryName = values.categoryName;
+      //       }
+      //       return item;
+      //     });
+      //     //setCategories(newlistCate);
+      //   })
+      //   .catch((error) => {})
+      //   .finally(() => {
+      //     setisOpenModal(false);
+      //   });
+    } else {
+      await dispatch(createCategory(values));
+    }
+    setisOpenModal(false);
   };
   return (
     <HeaderPageCategory>

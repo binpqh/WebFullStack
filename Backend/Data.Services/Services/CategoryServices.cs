@@ -25,7 +25,7 @@ namespace Data.Services.Services
             }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<Category> DeleteAsync(int id)
         {
             using(BikeStoresContext db = new BikeStoresContext())
             {
@@ -34,7 +34,13 @@ namespace Data.Services.Services
                 {
                     db.Categories.Remove(cate);
                     await db.SaveChangesAsync();
+                    
                 }
+                else
+                {
+                    throw new Exception("Hổng có xóa được cate : "+id);
+                }
+                return cate;
             }
         }
 

@@ -13,6 +13,6 @@ namespace Data.Services.Interfaces
         Task<Category> GetByIdAsync(int id);
         Task<Category> CreateAsync(string nameCate);
         Task<Category> UpdateAsync(int id,string nameCate);
-        Task DeleteAsync(int id);
+        Task<Category>  DeleteAsync(int id);
     }
 }

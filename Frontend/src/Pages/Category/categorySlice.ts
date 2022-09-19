@@ -79,6 +79,7 @@ const categorySlice = createSlice({
         .addCase(deteleCategory.fulfilled,(state,action : any)=>
         {
             const temp = [...state.listcate];
+            console.log(action.payload);
             const newlistCate = temp.filter((item: ICategoryResult) => item.categoryId !== action.payload);
             return {
             listcate: newlistCate,

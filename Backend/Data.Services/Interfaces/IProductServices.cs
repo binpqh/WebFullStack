@@ -12,8 +12,8 @@ namespace Data.Services.Interfaces
     {
         Task<List<ProductResult>> GetAllAsync();
         Task<ProductResult> GetByIdAsync(int id);
-        Task<Product> CreateAsync(ProductType productType );
-        Task<ProductResult> UpdateAsync(int id, ProductType productResult);
+        Task<Product> CreateAsync(ProductInput productType );
+        Task<ProductResult> UpdateAsync(int id, ProductInput productResult);
         Task DeleteAsync(int id);
     }
 }

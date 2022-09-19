@@ -3,7 +3,8 @@ import styled from "styled-components";
 const StyleSpan = styled.span`
   display: flex;
   justify-content: center;
-  opacity: 0.5;
+  padding-bottom: 10px;
+  opacity: 0.75;
 `;
 
 const Footer = () => {

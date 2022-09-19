@@ -16,6 +16,7 @@ namespace Data.Services.Interfaces
         Task<Store> CreateAsync(StoreTypes create);
         Task<Store> UpdateAsync(int id, StoreTypes update);
         Task DeleteAsync(int id);
+      
 
     }
 }

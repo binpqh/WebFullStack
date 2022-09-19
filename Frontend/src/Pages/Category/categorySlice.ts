@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit"
 import { ICategoryResult } from "../../Interfaces/ICategoryServices";
 import { DeleteCategory, GetAllCategory, UpdateCategory } from "../../Services/Category.Services";
 import { CreateCategory } from "./../../Services/Category.Services";
-
+import { PlusOutlined  } from "@ant-design/icons";
 interface ICateSlice {
   listcate: ICategoryResult[];
 }

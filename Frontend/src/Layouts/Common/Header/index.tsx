@@ -49,19 +49,18 @@ const Header: React.FC<Props> = (props) => {
   };
 
 
-
+  const handleProduct = () => {
+    navigate("/");
+  };
   const handleCategory = () => {
     navigate("/category");
-  };
-  const handleProduct = () => {
-    navigate("/product");
   };
   const handleBrand = () => {
     navigate("/brand");
   };
 
   const handleStore = () => {
-    navigate("/");
+    navigate("/store");
   };
 
   const handleLogin = () => {

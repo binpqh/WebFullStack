@@ -68,6 +68,13 @@ const Category = () => {
     console.log("listcate : ", getCategory);
   }, [getCategory]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      await setCategories(getCategory);
+    };
+    fetchData();
+    console.log("listcate : ", getCategory);
+  }, [getCategory]);
   const columns = [
     {
       key: "categoryId",

@@ -33,8 +33,8 @@ namespace Data.Services
         {
             if (!optionsBuilder.IsConfigured)
             {
-
                 optionsBuilder.UseSqlServer("Data Source=BIN\\SQLEXPRESS;Initial Catalog=BikeStores;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;User Instance=False");
+
             }
         }
 

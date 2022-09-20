@@ -6,6 +6,7 @@ export const WrapInput = styled.div`
     padding: 10px;
     outline: none;
     font-size: 16px;
+    margin-block: 10px;
     border: hidden;
 
     &:focus {

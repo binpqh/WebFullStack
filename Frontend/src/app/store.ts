@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import categorySlice from '../Pages/Category/categorySlice';
-import productSlide from '../Pages/Product/productSlice';
+import productSlice from '../Pages/Product/productSlice';
 //import counterReducer from '../features/counter/counterSlice';
 
 export const store = configureStore({
@@ -8,7 +8,7 @@ export const store = configureStore({
     //counter: counterReducer,
 
     categorySlice : categorySlice.reducer,
-    productSlice: productSlide.reducer
+    productSlice: productSlice.reducer
   },
 });
 

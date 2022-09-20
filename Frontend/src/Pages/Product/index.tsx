@@ -5,26 +5,30 @@ import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 import { useDispatch} from 'react-redux';
 import { Button, Modal, Table } from 'antd';
 import ModalProduct from './CUProduct';
-import { useAppSelector } from "../../app/hook";
-import { DeleteProduct } from '../../Services/Product.Services';
+import { useAppSelector,useAppDispatch } from "../../app/hook";
 
 
 const Product = () => {
     const [products, setproducts] = useState<IProductResult[]>([]);
     const [productedit, setproductedit] = useState({});
     const [isOpenModal, setisOpenModal] = useState(false);
-    const dispatch = useDispatch<any>();
-    const getProduct = useAppSelector(listProductSelect);
+    const dispatch = useAppDispatch();
+
+    const Product = useAppSelector(listProductSelect);
+    
     useEffect(() => {
         // const fetchData = async () => {
         //     const results = await GetAllProduct();
         //     setproducts(results);
         //   };
         //   fetchData();
+      
         dispatch(fetchListProduct());
-        setproducts(getProduct);
-    }, [])
-
+       
+        
+       
+    },[])
+   
     const columns=[
         {
             key: 'productId',
@@ -94,37 +98,39 @@ const Product = () => {
                 okType : 'danger',
                 onOk : async ()=>
                 {
-                    //  //await console.log("id delete: ",values.productId);
+                     //await console.log("id delete: ",values.productId);
                     //  await DeleteProduct(values);
                     //  const results = await GetAllProduct();
                     // await setproducts(results);
-                    await dispatch(DeleteProduct(values))
+                    await dispatch(deteleProduct(values))
                     
                 }
             })
        
     }
-    const handleFinish = async(values : any) =>{
+    const handleFinish = async(id: number,values : any) =>{
         
-        // const isEdit = products.findIndex((item) => item.productId === values.productId)
-        // console.log("Check isEdit"+isEdit);
-        
-        //  if(isEdit>=0)
-        //  {
-        //     console.log(values)
-        //     await UpdateProduct(values);
-        //     const results = await GetAllProduct();
-        //     await setproducts(results);
-        //  }
-        //  else
-        //  {
-        //     console.log("sq",values.productId);
+        const isEdit = Product.findIndex((item: any) => item.productId === id);
+        console.log("Check isEdit"+id);
+        console.log("Check isEdit"+isEdit);
+         if(isEdit>=0)
+         {
+             console.log(values, id)
+            // await UpdateProduct(values);
+            // const results = await GetAllProduct();
+            // await setproducts(results);
+            await dispatch(updateProduct(values));
+         }
+         else
+         {
+            // console.log("sq",values.productId);
             
-        //     console.log("Chạy nhầm xún create rồi", values);
-        //     await CreateProduct(values)
+            console.log("Chạy nhầm xún create rồi", values);
+            // await CreateProduct(values)
+            await dispatch(createProduct(values));
             
-        //  }
-        //  setisOpenModal(false)
+         }
+         setisOpenModal(false)
      }
   return (
     <>
@@ -135,7 +141,7 @@ const Product = () => {
                 }
         <Table
             columns={columns}
-            dataSource={products}
+            dataSource={Product}
             rowKey="productId"
             />
     </>

@@ -52,17 +52,14 @@ const ProductSlice = createSlice({
         .addCase(fetchListProduct.fulfilled,(state :any , action)=>
         {
             console.log("slice said :",action.payload);
-            
-            state.listcate = action.payload
+            state.listproduct = [...action.payload]
         })
-        .addCase(fetchListProduct.rejected,(state :any , action)=>
+        .addCase(fetchListProduct.rejected,(state :any , action: any)=>
         {
-            console.log(action);
-            
-            
-            state.listcate = action.payload
+            console.log(action);            
+            state.listproduct = action.payload
         })
-        .addCase(updateProduct.fulfilled,(state: any, action : any)=>
+        .addCase(updateProduct.fulfilled,(state: any, action: any)=>
         {
             state.listproduct.forEach((item : IProductResult,index : number) => {
                 if(item.productId === action.payload.productId)
@@ -87,5 +84,5 @@ const ProductSlice = createSlice({
 
     }
 })
-export const listProductSelect= (state :any) => state.productSlide.listcate;
+export const listProductSelect= (state :any) => state.productSlice.listproduct;
 export default ProductSlice;

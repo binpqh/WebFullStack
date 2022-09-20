@@ -6,6 +6,7 @@ import { ICategoryResult } from '../../../Interfaces/ICategoryServices';
 import { IBrandResult } from '../../../Interfaces/IBrandServices';
 import { GetAllBrand } from '../../../Services/Brand.Services';
 
+
 const Option = Select;
 const ModalProduct = ({ props,title, item, isCreate, onCancel, onFinish, handleFail }: any) => {
 
@@ -16,8 +17,8 @@ const ModalProduct = ({ props,title, item, isCreate, onCancel, onFinish, handleF
         values.productId = item.productId;
 
         console.log("Modal said : "+item.productId);
-        onFinish(values)
-        //console.log(values);
+        onFinish(data.productId,values)
+        console.log(values);
 
     }
     useEffect(() => {

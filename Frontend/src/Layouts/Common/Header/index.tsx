@@ -63,7 +63,9 @@ const Header: React.FC<Props> = (props) => {
   };
 
   const handleLogin = () => {
-    navigate("/login");
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    window.location.href = "/login";
   };
 
   return (
@@ -93,7 +95,7 @@ const Header: React.FC<Props> = (props) => {
 
         <HeaderRight>
           <Button onClick={handleLogin} style={{ color: "white" }}>
-            Login
+            Log out
           </Button>
         </HeaderRight>
       </Wrapper>

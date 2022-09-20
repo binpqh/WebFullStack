@@ -1,4 +1,5 @@
 ﻿using Data.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace WebFullStack.Controllers
     //author hiki
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class BrandsController : ControllerBase
     {
         private readonly IBrandService _brandService;

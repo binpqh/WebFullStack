@@ -1,15 +1,17 @@
 ﻿using Data.Services;
 using Data.Services.Interfaces;
 using Data.Services.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace WebFullStack.Controllers
 {
 
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize(Roles = "Admin")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryServices _services;

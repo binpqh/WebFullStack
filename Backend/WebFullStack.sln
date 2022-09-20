@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebFullStack", "WebFullStac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Services", "Data.Services\Data.Services.csproj", "{739F2733-EDEA-4B7B-A486-9C9AEB530822}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFullStack_Fact", "WebFullStack_Fact\WebFullStack_Fact.csproj", "{7DC27598-D234-423A-8340-85EF9274945C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{739F2733-EDEA-4B7B-A486-9C9AEB530822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{739F2733-EDEA-4B7B-A486-9C9AEB530822}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{739F2733-EDEA-4B7B-A486-9C9AEB530822}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DC27598-D234-423A-8340-85EF9274945C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DC27598-D234-423A-8340-85EF9274945C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DC27598-D234-423A-8340-85EF9274945C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DC27598-D234-423A-8340-85EF9274945C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

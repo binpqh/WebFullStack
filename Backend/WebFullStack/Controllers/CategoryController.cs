@@ -18,9 +18,9 @@ namespace WebFullStack.Controllers
             _services = services;
         }
         [HttpGet("{id:int}")]
-        public async Task<Category> GetByIdAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
-            return await _services.GetByIdAsync(id);
+            return Ok(await _services.GetByIdAsync(id));
         }
         [HttpGet]
         public async Task<List<Category>> GetAllAsync()

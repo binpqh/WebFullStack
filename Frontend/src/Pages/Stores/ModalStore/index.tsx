@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import { Modal, Form, Input, Button } from 'antd'
 
 const ModalStore = ({ title, item, isCreate, onCancel, onFinish, handleFail }: any) => {

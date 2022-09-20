@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Modal, Table } from "antd";
 import ModalPopup from "./ModalCategory";
-import { useDispatch, useSelector } from "react-redux";
+import { PlusOutlined  } from "@ant-design/icons";
 import { createCategory, deleteCategory, fetchListCategory, listCategorySelect, updateCategory } from "./categorySlice";
 import { ICategoryResult } from "./../../Interfaces/ICategoryServices";
-import { useAppSelector } from "../../app/hook";
+import { useAppSelector, useAppDispatch } from '../../app/hook';
 
 const HeaderPageCategory = styled.div`
   background-color: #f5f6fa;
@@ -49,12 +49,13 @@ const HeaderRight = styled.div`
 `;
 
 const Category = () => {
-  const dispatch = useDispatch<any>();
+
+  const getCategory = useAppSelector(listCategorySelect);
+
+  const dispatch = useAppDispatch();
   const [categoryEdit, setcategoryEdit] = useState({});
   const [categories, setCategories] = useState<ICategoryResult[]>([]);
   const [isOpenModal, setisOpenModal] = useState(false);
-
-  const getCategory = useSelector(listCategorySelect);
 
   useEffect(() => {
     dispatch(fetchListCategory());
@@ -144,18 +145,21 @@ const Category = () => {
         </HeaderLeft>
 
         <HeaderRight>
-          <Wrapper>
-            <Button onClick={showModal}>Create Category</Button>
+        
+            <Button onClick={showModal} icon={<PlusOutlined />}>Create Category</Button>
             {isOpenModal && (
               <ModalPopup
                 isCreate={isOpenModal}
                 item={categoryEdit}
-                title="edwq"
+                title="Category"
                 onCancel={hideModal}
                 onFinish={handleFinish}
               ></ModalPopup>
             )}
-          </Wrapper>
+            <Button danger type="primary">
+            Delete Category
+          </Button>
+         
         </HeaderRight>
       </Wrapper>
 

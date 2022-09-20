@@ -33,9 +33,11 @@ namespace Data.Services.Services
                 if (cate != null)
                 {
                     db.Categories.Remove(cate);
+
                     await db.SaveChangesAsync();
 
                 }
+
                 else
                 {
                     throw new Exception("Hổng có xóa được cate : " + id);

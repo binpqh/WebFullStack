@@ -54,6 +54,7 @@ namespace Data.Services.Services
                 await _db.SaveChangesAsync();
             }
         }
+        
 
         public async Task<List<Store>> GetAllAsync()
         {

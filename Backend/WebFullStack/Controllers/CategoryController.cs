@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebFullStack.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
+
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryServices _services;
@@ -31,14 +33,14 @@ namespace WebFullStack.Controllers
             return await _services.CreateAsync(cate.CategoryName);
         }
         [HttpPut("{id:int}")]
-        public async Task<Category> UpdateAsync(int id,[FromBody]Category category)
+        public async Task<Category> UpdateAsync(int id, [FromBody] Category category)
         {
             return await _services.UpdateAsync(id, category.CategoryName);
         }
         [HttpDelete("{id:int}")]
-        public async Task DeleteAsync(int id)
+        public async Task<Category> DeleteAsync(int id)
         {
-            await _services.DeleteAsync(id);
+            return await _services.DeleteAsync(id);
         }
     }
 }

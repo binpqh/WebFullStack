@@ -25,25 +25,31 @@ namespace Data.Services.Services
             }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<Category> DeleteAsync(int id)
         {
-            using(BikeStoresContext db = new BikeStoresContext())
+            using (BikeStoresContext db = new BikeStoresContext())
             {
                 var cate = await db.Categories.FindAsync(id);
-                if(cate != null)
+                if (cate != null)
                 {
                     db.Categories.Remove(cate);
                     await db.SaveChangesAsync();
+
                 }
+                else
+                {
+                    throw new Exception("Hổng có xóa được cate : " + id);
+                }
+                return cate;
             }
         }
 
         public async Task<List<Category>> GetAllAsync()
         {
-            using(BikeStoresContext db = new BikeStoresContext())
+            using (BikeStoresContext db = new BikeStoresContext())
             {
                 var listcate = await db.Categories.ToListAsync();
-                if(listcate == null)
+                if (listcate == null)
                 {
                     throw new Exception("Danh sách Category đang bị null nè má ơi");
                 }
@@ -53,29 +59,29 @@ namespace Data.Services.Services
 
         public async Task<Category> GetByIdAsync(int id)
         {
-            using(BikeStoresContext db = new BikeStoresContext())
+            using (BikeStoresContext db = new BikeStoresContext())
             {
                 var cate = await db.Categories.FindAsync(id);
-                if(cate==null)
+                if (cate == null)
                 {
                     throw new Exception("Hổng tìm thấy Cate có id =" + id);
                 }
                 else
                 {
                     return cate;
-                }    
-            }    
+                }
+            }
         }
 
         public async Task<Category> UpdateAsync(int id, string nameCate)
         {
-            using(BikeStoresContext db = new BikeStoresContext())
+            using (BikeStoresContext db = new BikeStoresContext())
             {
                 var cate = await db.Categories.FindAsync(id);
-                if(cate== null)
+                if (cate == null)
                 {
                     throw new Exception("Hong tìm thấy cate có id :" + id);
-                }    
+                }
                 else
                 {
                     cate.CategoryName = nameCate ?? cate.CategoryName;

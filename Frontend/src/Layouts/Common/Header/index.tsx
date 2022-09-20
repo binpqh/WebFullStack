@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { Button } from "antd";
+
 import { useNavigate } from "react-router-dom";
+
+import Button from "@mui/material/Button";
 
 interface Props {
   content: string;
@@ -16,6 +18,9 @@ const Wrapper = styled.div`
 `;
 
 const HeaderLeft = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   padding-bottom: 4px;
   color: #fff;
   h2 {
@@ -51,20 +56,46 @@ const Header: React.FC<Props> = (props) => {
     navigate("/category");
   };
 
+  const handleBrand = () => {
+    navigate("/brand");
+  };
+
+  const handleStore = () => {
+    navigate("/store");
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <header>
       <Wrapper>
         <HeaderLeft>
-          <h2 onClick={handleTitle}>
+          {/* <h2 onClick={handleTitle}>
             <strong>{props.content}</strong> Management
-          </h2>
+          </h2> */}
+
+          <Button onClick={handleProduct} style={{ color: "white" }}>
+            Product
+          </Button>
+
+          <Button onClick={handleStore} style={{ color: "white" }}>
+            Store
+          </Button>
+
+          <Button onClick={handleCategory} style={{ color: "white" }}>
+            Category
+          </Button>
+
+          <Button onClick={handleBrand} style={{ color: "white" }}>
+            Brand
+          </Button>
         </HeaderLeft>
 
         <HeaderRight>
-          <Button onClick={handleProduct}>Product</Button>
-
-          <Button danger onClick={handleCategory}>
-            Category
+          <Button onClick={handleLogin} style={{ color: "white" }}>
+            Login
           </Button>
         </HeaderRight>
       </Wrapper>

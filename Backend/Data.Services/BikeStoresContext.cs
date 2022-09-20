@@ -26,13 +26,15 @@ namespace Data.Services
         public virtual DbSet<Staff> Staffs { get; set; } = null!;
         public virtual DbSet<Stock> Stocks { get; set; } = null!;
         public virtual DbSet<Store> Stores { get; set; } = null!;
+        public virtual DbSet<RefreshToken> RefreshToken { get; set; } = null!;
+        public virtual DbSet<Account> Accounts { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+                optionsBuilder.UseSqlServer("Server=.;Database=BikeStores;Trusted_Connection=True;");
 
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-3HCOMFD;Initial Catalog=BikeStores;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;User Instance=False");
             }
         }
 

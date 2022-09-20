@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { Modal, Form, Input, Typography } from "antd";
+import {  Form, Input, Typography } from "antd";
 import LoginDataRequest from "../../../Interfaces/Auth/LoginDataRequest";
 
-import { WrapForm, FormFooter } from "../../../Components/StyleForm";
-import { WrapInput } from "../../../Components/StyleInput";
+import { WrapForm } from "../../../Components/StyleForm";
+//import { WrapInput } from "../../../Components/StyleInput";
 import { Card } from "../../../Components/Card";
 import { Button } from "../../../Components/StyleButton";
 import { useNavigate } from "react-router-dom";

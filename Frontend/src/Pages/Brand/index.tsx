@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { Button, Table, Modal } from "antd";
 import { useState, useEffect } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
 
+import { useAppSelector, useAppDispatch } from '../../app/hook';
 import Filters from "../../Components/Filters";
 import BrandModal from "./BrandModal";
 import { BrandClass } from "../../Interfaces/BrandClass";
-//import { brandsRemainingSelector } from "../../app/selectors";
-import { deleteBrand,listBrandsSelect } from "../../Features/Brand/BrandList/brandsSlice";
-//import Message from "../../Interfaces/Common/Message";
+
+import { deleteBrand,listBrandsSelect,fetchBrands } from "../../Features/Brand/BrandList/brandsSlice";
+
 
 const HeaderPageBrand = styled.div`
   background-color: #f5f6fa;
@@ -52,29 +52,31 @@ const HeaderRight = styled.div`
 `;
 
 const Brand = () => {
-  const dispatch = useDispatch<any>();
+
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<Array<number>>([]);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isContentCreate, setIsContentCreate] = useState<boolean>(true);
   const [brandEdit, setBrandEdit] = useState<BrandClass>();
-  const [brands, setBrands] = useState<BrandClass[] | undefined>([]);
+  const [brands, setBrands] = useState<BrandClass[]>([]);
 
-  const getBrands = useSelector(listBrandsSelect);
 
+  const getbrands  = useAppSelector(listBrandsSelect);
+  const dispatch = useAppDispatch();
+
+  useEffect(()=>
+  {
+   
+      dispatch(fetchBrands());
+     
+  },[]);
   useEffect(() => {
-    setBrands(getBrands);
-  }, [getBrands]);
-
-  // const openNotification = (message: Message) => {
-  //   notification.open({
-  //     message: message.TitleMessage,
-  //     description: message.Description,
-  //     onClick: () => {
-  //       console.log("Notification Clicked!");
-  //     },
-  //   });
-  // };
+    const fetchData = async () => {
+      await setBrands(getbrands);
+    };
+    fetchData();
+    console.log("listbrands : ", getbrands);
+  }, [getbrands]);
 
   const showModal = (brand: BrandClass) => {
     setIsOpenModal(true);

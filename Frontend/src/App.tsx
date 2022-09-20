@@ -36,12 +36,13 @@ function App() {
           <Route index element={<Brand />} />;
         </Route>
 
-        {/* <Route path="/login" element={<LayoutDefault content="Login" />}> */}
-        <Route path="login" element={<Login/>} />
+        <Route path="/login" element={<LayoutDefault content="Login" />}>
+        <Route index element={<Login />} />;
           {/* </Route> */}
           {/* khúc này thêm 1 page k có quyền khi mà chưa login
           <Route path={'not-auth'} element={<NotAuth />} /> */}
-          {/* </Route> */}
+          </Route>
+      {/* </Route> */}
       </Routes>
     </div>
   );

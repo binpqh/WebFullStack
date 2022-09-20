@@ -362,3 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 Backend/Data.Services/BikeStoresContext.cs
+Backend/WebFullStack.sln
+Backend/WebFullStack_Fact/WebFullStack_Fact.csproj
+Backend/WebFullStack_Fact/UnitTest1.cs
+Backend/WebFullStack_Fact/UnitTest1.cs

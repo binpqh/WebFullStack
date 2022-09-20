@@ -1,5 +1,5 @@
 import axiosClient from '../API/AxiosClient';
-import { ICategoryInput,ICategoryResult } from '../Interfaces/ICategoryServices';
+import {ICategoryResult } from '../Interfaces/ICategoryServices';
 
 
 export const GetAllCategory = async()=>
@@ -14,11 +14,11 @@ export const CreateCategory = async(categoryName : any)=>
 {
     return(await axiosClient.post<ICategoryResult>(`/Category`,categoryName)).data;
 };
-export const UpdateCategory = async(category: ICategoryResult)=>
+export const UpdateCategory = async(category : ICategoryResult)=>
 {
-    return(await axiosClient.put<ICategoryResult>(`/Category/${category.categoryId}`)).data;
+    return(await axiosClient.put<ICategoryResult>(`/Category/${category.categoryId}`,category)).data;
 };
-export const DeteleCategory = async(category : any)=>
+export const DeteleCategory = async(cate : any)=>
 {
-    return(await axiosClient.delete(`/Category/${category.categoryId}`)).data;
+    return(await axiosClient.delete(`/Category/${cate.categoryId}`)).data;
 };

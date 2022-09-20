@@ -63,7 +63,7 @@ const Category = () => {
                 title :"Are u sure?",
                 okText :'Sure',
                 okType : 'danger',
-                onOk :async ()=>
+                onOk : ()=>
                 {
                     // useEffect(() => {
                     //     const fetchData = async () => {
@@ -104,9 +104,7 @@ const Category = () => {
             rowKey="categoryId"
             />
     </>
-    
-    
-  )
-}
+  );
+};
 
-export default Category
+export default Category;

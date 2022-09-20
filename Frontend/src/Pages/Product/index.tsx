@@ -4,8 +4,7 @@ import {IProductInput, IProductResult } from '../../Interfaces/IProductServices'
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 import { useDispatch} from 'react-redux';
 import { Button, Modal, Table } from 'antd';
-import ModalProduct from './CUProduct';
-import { useAppSelector,useAppDispatch } from "../../app/hook";
+import ModalProduct from './ModalProduct';
 
 
 const Product = () => {

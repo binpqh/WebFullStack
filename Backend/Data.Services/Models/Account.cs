@@ -22,8 +22,6 @@ namespace Data.Services.Models
         public string Password { get; set; }
         [Required]
         public string Role { get; set; }
-
-
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>().HasData(new Account

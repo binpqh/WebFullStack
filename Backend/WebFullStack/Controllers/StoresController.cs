@@ -9,6 +9,7 @@ namespace WebFullStack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class StoresController : ControllerBase
     {
         private readonly IStoreServices _services;

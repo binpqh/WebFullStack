@@ -27,7 +27,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuth) {
-      navigate('/');
+      navigate("/");
     }
   });
 
@@ -36,10 +36,10 @@ const Login = () => {
     try {
       await dispatch(
         login({
-          username: user.uid,
+          uid: user.uid,
           password: user.password,
         })
-      )
+      );
     } catch (error: any) {
       console.log(error.desc);
     }

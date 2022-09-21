@@ -1,3 +1,4 @@
+//author: hiki
 import styled from "styled-components";
 import { Button, Table, Modal } from "antd";
 import { useState, useEffect } from "react";
@@ -7,9 +8,9 @@ import { useAppSelector, useAppDispatch } from '../../app/hook';
 import Filters from "../../Components/Filters";
 import BrandModal from "./BrandModal";
 import { BrandClass } from "../../Interfaces/BrandClass";
-
-import { deleteBrand,listBrandsSelect,fetchBrands } from "../../Features/Brand/BrandList/brandsSlice";
-
+import { brandsRemainingSelector } from "../../app/selectors";
+import { deleteBrand } from "../../Features/Brand/BrandList/brandsSlice";
+//import Message from "../../Interfaces/Common/Message";
 
 const HeaderPageBrand = styled.div`
   background-color: #f5f6fa;
@@ -149,7 +150,7 @@ const Brand = () => {
             />
             <DeleteOutlined
               onClick={() => handleDeleteCategory(brand)}
-              style={{ color: "orange", marginLeft: 7, cursor: "pointer" }}
+              style={{ color: "#ff3838", marginLeft: 7, cursor: "pointer" }}
             />
           </div>
         );
@@ -185,7 +186,7 @@ const Brand = () => {
       <Table
         rowSelection={rowSelection}
         pagination={{
-          // position: ["bottomCenter"],
+          position: ["bottomCenter"],
         }}
         columns={columns}
         dataSource={brands}

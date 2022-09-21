@@ -15,7 +15,9 @@ const StyleContainer = styled.div`
 const LayoutDefault: React.FC<Props> = (props) => {
   return (
     <StyleContainer>
-      <Header content={props.content} />
+      {localStorage.getItem("token") !== null
+      &&<Header content={props.content} />}
+      
       <Outlet />
       <Footer />
     </StyleContainer>

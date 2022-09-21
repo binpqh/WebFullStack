@@ -22,27 +22,27 @@ function App() {
   return (
     <div className="App">
       <Routes>
-      {/* <Route element={<PrivateRoute roles={["Admin"]} />}> */}
-        <Route path="/" element={<LayoutDefault content="Product" />}>
-          <Route index element={<Product />} />;
-        </Route>
-        <Route path="/category" element={<LayoutDefault content="Category" />}>
-          <Route index element={<Category />} />;
-        </Route>
-        <Route path="/store" element={<LayoutDefault content="Store" />}>
-          <Route index element={<Store />} />;
-        </Route>
-        <Route path="/brand" element={<LayoutDefault content="Brand" />}>
-          <Route index element={<Brand />} />;
+        <Route element={<PrivateRoute roles={["Admin"]} />}>
+          <Route path="/product" element={<LayoutDefault content="Product" />}>
+            <Route index element={<Product />} />;
+          </Route>
+          <Route path="/category" element={<LayoutDefault content="Category" />}>
+            <Route index element={<Category />} />;
+          </Route>
+          <Route path="/" element={<LayoutDefault content="Store" />}>
+            <Route index element={<Store />} />;
+          </Route>
+          <Route path="/brand" element={<LayoutDefault content="Brand" />}>
+            <Route index element={<Brand />} />;
+          </Route>
+
+          {/* khúc này thêm 1 page k có quyền khi mà chưa login
+         <Route path={'not-auth'} element={<NotAuth />} /> */}
         </Route>
 
         <Route path="/login" element={<LayoutDefault content="Login" />}>
-        <Route index element={<Login />} />;
-          {/* </Route> */}
-          {/* khúc này thêm 1 page k có quyền khi mà chưa login
-          <Route path={'not-auth'} element={<NotAuth />} /> */}
-          </Route>
-      {/* </Route> */}
+          <Route index element={<Login />} />;
+        </Route>
       </Routes>
     </div>
   );

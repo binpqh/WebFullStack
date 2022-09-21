@@ -1,15 +1,17 @@
 ﻿using Data.Services;
 using Data.Services.Interfaces;
 using Data.Services.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace WebFullStack.Controllers
 {
 
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize(Roles = "Admin")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryServices _services;
@@ -18,9 +20,9 @@ namespace WebFullStack.Controllers
             _services = services;
         }
         [HttpGet("{id:int}")]
-        public async Task<Category> GetByIdAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
-            return await _services.GetByIdAsync(id);
+            return Ok(await _services.GetByIdAsync(id));
         }
         [HttpGet]
         public async Task<List<Category>> GetAllAsync()

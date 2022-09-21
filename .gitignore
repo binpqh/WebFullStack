@@ -364,3 +364,4 @@ FodyWeavers.xsd
 Backend/Data.Services/BikeStoresContext.cs
 Backend/WebFullStack.Test.API.Category/WebFullStack.Test.API.Category.csproj
 Frontend/yarn.lock
+Backend/Data.Services/BikeStoresContext.cs

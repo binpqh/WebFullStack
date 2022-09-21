@@ -10,15 +10,11 @@ import Category from "./Pages/Category";
 import Store from "./Pages/Stores";
 import Brand from "./Pages/Brand";
 import Login from "./Pages/Auth/Login";
-import { fetchBrands } from "./Features/Brand/BrandList/brandsSlice";
+import { fetchBrands } from "./Pages/Brand/brandsSlice";
 import { PrivateRoute } from "./Layouts/PrivateRoute";
 
 function App() {
   const dispatch = useDispatch<any>();
-  useEffect(() => {
-    dispatch(fetchBrands());
-  }, []);
-
   return (
     <div className="App">
       <Routes>

@@ -33,7 +33,7 @@ namespace Data.Services
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=BIN\\SQLEXPRESS;Database=BikeStores;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.;Database=BikeStores;Trusted_Connection=True;");
 
             }
         }

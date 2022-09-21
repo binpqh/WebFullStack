@@ -1,5 +1,5 @@
 //author: hiki
-export interface BrandClass {
+export interface IBrandServices {
   brandId: number;
   brandName: string;
 }

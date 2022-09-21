@@ -1,6 +1,6 @@
 //author: hiki
 import axiosClient from "../API/AxiosClient";
-import { BrandClass } from "../Interfaces/BrandClass";
+import { IBrandServices } from "../Interfaces/IBrandServices";
 import ApiResponse from "../Interfaces/Common/ApiResponse";
 import axios from "axios";
 
@@ -13,12 +13,12 @@ const axiosConfig = {
 };
 
 export const GetAllBrands = async () => {
-  return (await axiosClient.get<ApiResponse<BrandClass[]>>(`/Brands`)).data;
+  return (await axiosClient.get<ApiResponse<IBrandServices[]>>(`/Brands`)).data;
 };
 
 export const CreateBrand = async (brandName: any) => {
   return (
-    await axios.post<ApiResponse<BrandClass>>(
+    await axios.post<ApiResponse<IBrandServices>>(
       `${process.env.REACT_APP_API_URL}/Brands/create`,
       JSON.stringify(brandName),
       axiosConfig
@@ -26,9 +26,9 @@ export const CreateBrand = async (brandName: any) => {
   ).data;
 };
 
-export const UpdateBrand = async (brand: BrandClass) => {
+export const UpdateBrand = async (brand: IBrandServices) => {
   return (
-    await axios.put<ApiResponse<BrandClass>>(
+    await axios.put<ApiResponse<IBrandServices>>(
       `${process.env.REACT_APP_API_URL}/Brands/update/${brand.brandId}`,
       JSON.stringify(brand.brandName),
       axiosConfig

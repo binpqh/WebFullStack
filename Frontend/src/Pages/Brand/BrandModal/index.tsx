@@ -2,16 +2,16 @@
 import { useState, useEffect } from "react";
 import { Modal, Form, Input, Button } from "antd";
 import { useDispatch } from "react-redux";
-import { BrandClass } from "../../../Interfaces/BrandClass";
-import { createBrand, updateBrand } from "../../../Features/Brand/BrandList/brandsSlice";
+import { IBrandServices } from "../../../Interfaces/IBrandServices";
+import { createBrand, updateBrand } from "../brandsSlice";
 
 const BrandModal = ({ brand, isCreate, onCancel, handleFail, isContentCreate }: any) => {
   const dispatch = useDispatch<any>();
 
-  const [data, setData] = useState<BrandClass>(brand);
+  const [data, setData] = useState<IBrandServices>(brand);
 
-  const handleFinish = (brand: BrandClass) => {
-    const valueUpdateBrand: BrandClass = { brandId: data.brandId, brandName: brand.brandName };
+  const handleFinish = (brand: IBrandServices) => {
+    const valueUpdateBrand: IBrandServices = { brandId: data.brandId, brandName: brand.brandName };
 
     if (isContentCreate) {
       dispatch(createBrand(brand.brandName));

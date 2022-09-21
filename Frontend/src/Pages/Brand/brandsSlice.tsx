@@ -1,12 +1,13 @@
 //author: hiki
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { BrandClass } from "../../../Interfaces/BrandClass";
+import { createSelector } from "@reduxjs/toolkit";
+import { IBrandServices } from "../../Interfaces/IBrandServices";
 
-import { GetAllBrands, CreateBrand, UpdateBrand, DeleteBrand } from "../../../Services/BrandServices";
+import { GetAllBrands, CreateBrand, UpdateBrand, DeleteBrand } from "../../Services/Brand.Services";
 
 interface initialState {
   status: string;
-  brands: BrandClass[];
+  brands: IBrandServices[];
 }
 
 const value: initialState = {
@@ -33,7 +34,7 @@ const BrandsSlice = createSlice({
         state.brands.push(action.payload);
       })
       .addCase(updateBrand.fulfilled, (state, action) => {
-        state.brands.forEach((item: BrandClass, index: number) => {
+        state.brands.forEach((item: IBrandServices, index: number) => {
           if (item.brandId === action.payload?.brandId) {
             state.brands[index] = action.payload;
             return;
@@ -42,7 +43,7 @@ const BrandsSlice = createSlice({
       })
       .addCase(deleteBrand.fulfilled, (state, action) => {
         const temp = [...state.brands];
-        const newBrands = temp.filter((item: BrandClass) => item.brandId !== action.payload);
+        const newBrands = temp.filter((item: IBrandServices) => item.brandId !== action.payload);
         return {
           ...state,
           brands: newBrands,
@@ -64,7 +65,7 @@ export const createBrand = createAsyncThunk("brands/createBrand", async (brandNa
   return result.resultObj;
 });
 
-export const updateBrand = createAsyncThunk("brands/updateBrand", async (brand: BrandClass) => {
+export const updateBrand = createAsyncThunk("brands/updateBrand", async (brand: IBrandServices) => {
   const result = await UpdateBrand(brand);
 
   if (!result.isSuccessed) return;
@@ -78,6 +79,16 @@ export const deleteBrand = createAsyncThunk("brands/deleteBrand", async (brandId
   if (!result.isSuccessed) return;
 
   return result.resultObj;
+});
+
+export const searchTextSelector = (state: any) => state.filters.search;
+
+export const brandListSelector = (state: any) => state.brandList.brands;
+
+export const brandsRemainingSelector = createSelector(brandListSelector, searchTextSelector, (brands, search) => {
+  return brands.filter((brand: any) => {
+    return brand.brandName.toLowerCase().includes(search.toLowerCase());
+  });
 });
 
 export default BrandsSlice;

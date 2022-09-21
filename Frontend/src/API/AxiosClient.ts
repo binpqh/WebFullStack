@@ -36,7 +36,7 @@ axiosClient.interceptors.response.use(
 
           const data = { refreshToken: localRefreshToken, token: localToken };
 
-          const rs = await axiosClient.post("/auth/refresh-token", data);
+          const rs = await axiosClient.post("/auth/refreshToken", data);
           const { token, refreshToken, errors } = rs.data;
           if (errors) {
             localStorage.removeItem("token");

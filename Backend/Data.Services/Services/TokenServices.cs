@@ -129,7 +129,7 @@ namespace Data.Services.Services
                 IpAddress = ipV4,
                 Uid = storedRefreshToken.Uid,
                 TokenStored = storedRefreshToken,
-                Role = tokenReader.Claims.First(c=>c.Type == "Role").Value
+                Role = tokenReader.Claims.First(c => c.Type == "Role").Value
             };
         }
 

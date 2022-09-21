@@ -1,14 +1,13 @@
-
-import React, { useState, useEffect } from 'react';
-import { GetAllStore, DeteleStore, CreateStore, UpdateStore } from '../../Services/Stores.Services';
-import { IStoreResult } from './../../Interfaces/IStoreServices';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Modal,Button, Table } from 'antd';
-import ModalStore from './ModalStore';
-import { PlusOutlined  } from "@ant-design/icons";
-import { useAppSelector, useAppDispatch } from '../../app/hook';
+import React, { useState, useEffect } from "react";
+import { GetAllStore, DeteleStore, CreateStore, UpdateStore } from "../../Services/Stores.Services";
+import { IStoreResult } from "./../../Interfaces/IStoreServices";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Modal, Button, Table } from "antd";
+import ModalStore from "./ModalStore";
+import { PlusOutlined } from "@ant-design/icons";
+import { useAppSelector, useAppDispatch } from "../../app/hook";
 import styled from "styled-components";
-import { fetchListStores,listStoreSelect,updateStore,deteleStore,createStore} from './storeSlice';
+import { fetchListStores, listStoreSelect, updateStore, deteleStore, createStore } from "./storeSlice";
 const HeaderPageCategory = styled.div`
   background-color: #f5f6fa;
   width: 100%;
@@ -49,162 +48,146 @@ const HeaderRight = styled.div`
   gap: 15px;
 `;
 const Store = () => {
+  const stores = useAppSelector(listStoreSelect);
+  const dispatch = useAppDispatch();
+  const [storesEdit, setstoresEdit] = useState({});
+  const [isOpenModal, setisOpenModal] = useState(false);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Array<number>>([]);
 
-    const stores  = useAppSelector(listStoreSelect);
-    const dispatch = useAppDispatch();
-    const [storesEdit, setstoresEdit] = useState({});
-    const [isOpenModal, setisOpenModal] = useState(false);
-    const [selectedRowKeys, setSelectedRowKeys] = useState<Array<number>>([]);
-    
-    useEffect(()=>
+  useEffect(() => {
+    dispatch(fetchListStores());
+  }, []);
+
+  const columns = [
     {
-        dispatch(fetchListStores());
-       
-    })
-
-    const columns = [
-        {
-
-            key: 'storeName',
-            title: 'store name',
-            dataIndex: 'storeName'
-        },
-        {
-
-            key: 'phone',
-            title: 'phone',
-            dataIndex: 'phone'
-        },
-        {
-
-            key: 'email',
-            title: 'email',
-            dataIndex: 'email'
-        },
-        {
-
-            key: 'street',
-            title: 'street',
-            dataIndex: 'street'
-        },
-        {
-
-            key: 'city',
-            title: 'city',
-            dataIndex: 'city'
-        },
-        {
-
-            key: 'state',
-            title: 'state',
-            dataIndex: 'state'
-        },
-        {
-
-            key: 'zipCode',
-            title: 'zip Code',
-            dataIndex: 'zipCode'
-        },
-        {
-            key: 'action',
-            title: 'Action',
-            render: (record: any) => {
-                return <>
-                    <EditOutlined  onClick={()=>{showModal(record)}}/>
-                    <DeleteOutlined onClick={() => handleDeleteStore(record)} style={{ color: "orange", marginLeft: 12 }} />
-                </>
-            }
-
-        }
-    ]
-    const showModal =(record : any) =>
+      key: "storeName",
+      title: "store name",
+      dataIndex: "storeName",
+    },
     {
-        console.log("idStore: "+record.storeId);
-        setisOpenModal(true);
-        setstoresEdit(record);
-    }
-    const hideModal = ()=>
+      key: "phone",
+      title: "phone",
+      dataIndex: "phone",
+    },
     {
-        setisOpenModal(false);
+      key: "email",
+      title: "email",
+      dataIndex: "email",
+    },
+    {
+      key: "street",
+      title: "street",
+      dataIndex: "street",
+    },
+    {
+      key: "city",
+      title: "city",
+      dataIndex: "city",
+    },
+    {
+      key: "state",
+      title: "state",
+      dataIndex: "state",
+    },
+    {
+      key: "zipCode",
+      title: "zip Code",
+      dataIndex: "zipCode",
+    },
+    {
+      key: "action",
+      title: "Action",
+      render: (record: any) => {
+        return (
+          <>
+            <EditOutlined
+              onClick={() => {
+                showModal(record);
+              }}
+            />
+            <DeleteOutlined onClick={() => handleDeleteStore(record)} style={{ color: "orange", marginLeft: 12 }} />
+          </>
+        );
+      },
+    },
+  ];
+  const showModal = (record: any) => {
+    console.log("idStore: " + record.storeId);
+    setisOpenModal(true);
+    setstoresEdit(record);
+  };
+  const hideModal = () => {
+    setisOpenModal(false);
+  };
+  const handleDeleteStore = (record: any) => {
+    Modal.confirm({
+      title: "Are u sure?",
+      okText: "Sure",
+      okType: "danger",
+      onOk: async () => {
+        await dispatch(deteleStore(record));
+      },
+    });
+  };
+
+  const handleFinish = async (id: number, values: any) => {
+    const isEdit = stores.findIndex((item: any) => item.storeId === id);
+    if (isEdit >= 0) {
+      await dispatch(updateStore({ storeId: id, ...values }));
+      setisOpenModal(false);
+    } else {
+      await dispatch(createStore(values));
+      setisOpenModal(false);
     }
-    const handleDeleteStore = (record: any) => {
-        Modal.confirm(
-            {
-                title: "Are u sure?",
-                okText: 'Sure',
-                okType: 'danger',
-                onOk: async () => {
-                    await dispatch(deteleStore(record));
-                    
-                }
-                
+  };
 
-            })
+  const onSelectChange = (newSelectedRowKeys: any) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
 
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
 
-    }
+  const handleDeleteStoreChecked = () => {
+    selectedRowKeys.forEach((id: any, values: any) => {
+      //console.log("id",id);
+      dispatch(deteleStore({ storeId: id, ...values }));
+    });
+  };
 
-    const handleFinish = async(id:number,values : any) =>{
-         const isEdit = stores.findIndex((item:any)=> item.storeId === id)
-         if(isEdit>=0)
-         {
-             await dispatch(updateStore({storeId: id,...values}));
-             setisOpenModal(false);
-         }
-         else
-         {
-            await dispatch(createStore(values));
-            setisOpenModal(false);
-         }
-     }
-    
-      const onSelectChange = (newSelectedRowKeys: any) => {
-        setSelectedRowKeys(newSelectedRowKeys);
-      };
-    
-      const rowSelection = {
-        selectedRowKeys,
-        onChange: onSelectChange,
-      };
-    
-      const handleDeleteStoreChecked = () => {
-        selectedRowKeys.forEach((id:any,values:any) => {
-        //console.log("id",id);
-          dispatch(deteleStore({storeId:id,...values}));
-        });
-      };
-      
-    return (
-        <><HeaderPageCategory>
+  return (
+    <>
+      <HeaderPageCategory>
         <Wrapper>
           <HeaderLeft>
             <h2>List Stores</h2>
           </HeaderLeft>
-  
+
           <HeaderRight>
-            
-              <Button onClick={showModal} icon={<PlusOutlined />}>Create Store</Button>
-              {isOpenModal && (
-                 <ModalStore   isCreate={isOpenModal} item={storesEdit} title="Store" onCancel={hideModal} onFinish={handleFinish} >
-                 </ModalStore>
-              )}
-                <Button onClick={handleDeleteStoreChecked} danger type="primary">
-            Delete Store
-          </Button>
-            
-          
+            <Button onClick={showModal} icon={<PlusOutlined />}>
+              Create Store
+            </Button>
+            {isOpenModal && (
+              <ModalStore
+                isCreate={isOpenModal}
+                item={storesEdit}
+                title="Store"
+                onCancel={hideModal}
+                onFinish={handleFinish}
+              ></ModalStore>
+            )}
+            <Button onClick={handleDeleteStoreChecked} danger type="primary">
+              Delete Store
+            </Button>
           </HeaderRight>
         </Wrapper>
-  
+
         <Table rowSelection={rowSelection} columns={columns} dataSource={stores} rowKey="storeId" />
       </HeaderPageCategory>
-           
-        </>
-
-
-
-
-    );
+    </>
+  );
 };
 
 export default Store;

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Col, Row, Input, Typography } from "antd";
-import FiltersBrandSlice from "../../Features/Brand/Filters/filtersBrandSlice";
+import FiltersBrandSlice from "../../Pages/Brand/filtersBrandSlice";
 
 const { Search } = Input;
 

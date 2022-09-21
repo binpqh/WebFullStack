@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Filters from "../../Components/Filters";
 import BrandModal from "./BrandModal";
-import { BrandClass } from "../../Interfaces/BrandClass";
-import { brandsRemainingSelector } from "../../app/selectors";
-import { deleteBrand } from "../../Features/Brand/BrandList/brandsSlice";
+import { IBrandServices } from "../../Interfaces/IBrandServices";
+import { fetchBrands } from "../../Pages/Brand/brandsSlice";
+import { brandsRemainingSelector } from "../../Pages/Brand/brandsSlice";
+import { deleteBrand } from "./brandsSlice";
 //import Message from "../../Interfaces/Common/Message";
 
 const HeaderPageBrand = styled.div`
@@ -58,8 +59,12 @@ const Brand = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Array<number>>([]);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isContentCreate, setIsContentCreate] = useState<boolean>(true);
-  const [brandEdit, setBrandEdit] = useState<BrandClass>();
-  const [brands, setBrands] = useState<BrandClass[] | undefined>([]);
+  const [brandEdit, setBrandEdit] = useState<IBrandServices>();
+  const [brands, setBrands] = useState<IBrandServices[] | undefined>([]);
+
+  useEffect(() => {
+    dispatch(fetchBrands());
+  }, []);
 
   const getBrands = useSelector(brandsRemainingSelector);
 
@@ -77,7 +82,7 @@ const Brand = () => {
   //   });
   // };
 
-  const showModal = (brand: BrandClass) => {
+  const showModal = (brand: IBrandServices) => {
     setIsOpenModal(true);
     setBrandEdit(brand);
   };
@@ -100,7 +105,7 @@ const Brand = () => {
     onChange: onSelectChange,
   };
 
-  const handleDeleteCategory = (brand: BrandClass) => {
+  const handleDeleteCategory = (brand: IBrandServices) => {
     Modal.confirm({
       title: "Are u sure?",
       okText: "Sure",
@@ -136,7 +141,7 @@ const Brand = () => {
       title: "Action",
       width: "10%",
       align: "center" as "center",
-      render: (brand: BrandClass) => {
+      render: (brand: IBrandServices) => {
         return (
           <div>
             <EditOutlined

@@ -77,8 +77,8 @@ namespace Data.Services.Services
 
         public async Task<AuthResult> GenerateRefreshToken(string token, string? ipV4)
         {
-            var verifyToken = await VerifyToken(token, ipV4);
-
+            
+            VerifyTokenResult verifyToken = await VerifyToken(token, ipV4);
             var claims = new[]
             {
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
@@ -86,7 +86,7 @@ namespace Data.Services.Services
             new Claim(JwtRegisteredClaimNames.UniqueName, verifyToken.Username),
             new Claim("Ip", verifyToken.IpAddress),
             new Claim(ClaimTypes.Role, verifyToken.Role),
-        };
+            };
 
             var creds = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256);
 
@@ -112,27 +112,37 @@ namespace Data.Services.Services
                 token = accessToken
             };
         }
-
         private async Task<VerifyTokenResult> VerifyToken(string token, string? ipV4)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var tokenReader = jwtTokenHandler.ReadJwtToken(token);
+            if (tokenReader == null)
+            {
+                throw new Exception("Hong đọc được token để refresh");
+            };
             var storedRefreshToken =
                 await _context.RefreshToken.FirstOrDefaultAsync(x => x.JwtTokenId == tokenReader.Id);
             if (storedRefreshToken == null) throw new Exception("Token is invalid");
 
             // Check ip v4
+               
             if (storedRefreshToken.IpAddress != ipV4) throw new Exception("Token is invalid");
-            return new VerifyTokenResult()
+            var role = tokenReader.Claims.FirstOrDefault(c => c.Type == "role").Value;
+            if(role == null)
+            {
+                throw new Exception("Hong tìm thấy role của user");
+            }    
+             var res = new VerifyTokenResult
             {
                 Username = tokenReader.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.UniqueName)?.Value,
                 IpAddress = ipV4,
                 Uid = storedRefreshToken.Uid,
                 TokenStored = storedRefreshToken,
-                Role = tokenReader.Claims.First(c=>c.Type == "Role").Value
-            };
-        }
+                Role = role
 
+             };
+            return res;
+        }
         private static string RandomString(int length)
         {
             var random = new Random();
